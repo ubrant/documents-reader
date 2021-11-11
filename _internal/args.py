@@ -5,14 +5,14 @@ from os    import getcwd
 # Command-line arguments:
 #          1 => directory-path
 #          2 => recursive-behavior [True/False]
-#          3 => recursion-depth    [0 for infinite]
+#          3 => recursion-depth    [1000 => infinite]
 ####
 class Arguments:
     def __init__(self):
         self.scriptName = ""
         self.directoryPath = getcwd()
         self.isRecursive = True
-        self.recursionDepth = 0
+        self.recursionDepth = 1000
         
         self.parseArguments()
 
@@ -42,7 +42,7 @@ class Arguments:
             try:
                 self.recursionDepth = int(argv.pop(0))
             except:
-                self.recursionDepth = 0
+                self.recursionDepth = 1000
 
         # Spoiling remaining elements
         while(argv):
@@ -51,7 +51,7 @@ class Arguments:
 
     def print(self):
         rd = self.recursionDepth
-        if(rd == 0):
+        if(rd == 1000):
             rd = "Infinite"
         
         print(f"Script Name:       {self.scriptName}")
