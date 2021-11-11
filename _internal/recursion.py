@@ -3,6 +3,8 @@ from os.path        import isfile
 from os.path        import isdir
 from os.path        import join
 
+from _internal.args import Arguments
+
 
 def getDirectories(directory, recursion = False, depth = 0):
     try:
@@ -28,3 +30,11 @@ def getFiles(directory, extension = ""):
                         yield full_name
     except:
         return f"<cannot access - {directory}>"
+
+def getDesiredFiles(arguments: Arguments, extension):
+    for dir in getDirectories(
+                        arguments.directoryPath,
+                        arguments.isRecursive,
+                        arguments.recursionDepth):
+        for full_filename in getFiles(dir, extension):
+            yield full_filename
