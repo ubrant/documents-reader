@@ -1,5 +1,5 @@
 from sys   import argv
-from os    import curdir
+from os    import getcwd
 
 ######
 # Command-line arguments:
@@ -10,7 +10,7 @@ from os    import curdir
 class Arguments:
     def __init__(self):
         self.scriptName = ""
-        self.directoryPath = curdir
+        self.directoryPath = getcwd()
         self.isRecursive = True
         self.recursionDepth = 0
         
@@ -26,7 +26,7 @@ class Arguments:
             try:
                 self.directoryPath = argv.pop(0)
             except:
-                self.directoryPath = curdir
+                self.directoryPath = getcwd()
         
         # Recursiveness enabled
         if(argv):
