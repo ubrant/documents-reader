@@ -7,7 +7,7 @@ from os    import curdir
 #          2 => recursive-behavior [True/False]
 #          3 => recursion-depth    [0 for infinite]
 ####
-class ParseArguments:
+class Arguments:
     def __init__(self):
         self.scriptName = ""
         self.directoryPath = curdir
