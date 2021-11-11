@@ -14,6 +14,6 @@ for dir in getDirectories(
                     arguments.recursionDepth):
     print(f"Scanning: {dir}")
 
-    for file in getFiles(dir):
+    for file in getFiles(dir, ".ubd"):
         print(f"    {file}")
 
