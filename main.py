@@ -6,7 +6,7 @@ from _internal.web         import  *
 # Global Settings
 settings = Settings()
 settings.print(
-    headingLine = "Using settings for processing:",
+    headingLine = "Settings:",
     indent = " > ",
     appendBlankLines = 1)
 

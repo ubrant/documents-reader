@@ -1,18 +1,22 @@
-from sys   import argv
-from os    import getcwd
+from sys        import argv
+from os         import getcwd
+from os.path    import join
 
 ######
 # Command-line arguments:
 #          1 => directory-path
 #          2 => recursive-behavior [True/False]
-#          3 => recursion-depth    [1000 => infinite]
+#          3 => recursion-depth    [1000000 => infinite]
 ####
 class Settings:
     def __init__(self):
+        libsPath = "external-libs"
+
         self.scriptName = ""
         self.directoryPath = getcwd()
         self.isRecursive = True
-        self.recursionDepth = 1000
+        self.recursionDepth = 1000000
+        self.libBootstrapFile = join(getcwd(), libsPath, "bootstrap.min.css")
         
         self.parseArguments()
 
@@ -42,7 +46,7 @@ class Settings:
             try:
                 self.recursionDepth = int(argv.pop(0))
             except:
-                self.recursionDepth = 1000
+                self.recursionDepth = 1000000
 
         # Spoiling remaining elements
         while(argv):
@@ -51,14 +55,15 @@ class Settings:
 
     def print(self, headingLine, indent, appendBlankLines = 0):
         rd = self.recursionDepth
-        if(rd == 1000):
+        if(rd == 1000000):
             rd = "Infinite"
         
         print(headingLine)
-        print(f"{indent}Script Name       -> {self.scriptName}")
-        print(f"{indent}Directory Path    -> {self.directoryPath}")
-        print(f"{indent}Recursion Enabled -> {self.isRecursive}")
-        print(f"{indent}Recursion Depth   -> {rd}")
+        print(f"{indent}Script Name         -> {self.scriptName}")
+        print(f"{indent}Directory Path      -> {self.directoryPath}")
+        print(f"{indent}Recursion Enabled   -> {self.isRecursive}")
+        print(f"{indent}Recursion Depth     -> {rd}")
+        print(f"{indent}Library (Bootstrap) -> {self.libBootstrapFile}")
 
         while (appendBlankLines > 0):
             print("")
