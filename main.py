@@ -14,6 +14,8 @@ settings.print(
 print("Processing Files")
 print("----------------")
 
+parsedData = Parser()
 for file in getDesiredFiles(settings, ".ubd"):
     print(f"Parsing {file}")
+    parsedData.readFile(file)
 
