@@ -31,10 +31,10 @@ def getFiles(directory, extension = ""):
     except:
         return f"<cannot access - {directory}>"
 
-def getDesiredFiles(arguments: Settings, extension):
+def getDesiredFiles(settings: Settings, extension):
     for dir in getDirectories(
-                        arguments.directoryPath,
-                        arguments.isRecursive,
-                        arguments.recursionDepth):
+                        settings.scanDir,
+                        settings.isRecursive,
+                        settings.recursionDepth):
         for full_filename in getFiles(dir, extension):
             yield full_filename
