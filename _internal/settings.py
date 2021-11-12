@@ -72,14 +72,16 @@ class Settings:
         if(rd == 1000000):
             rd = "Infinite"
         
+        bsf = self.libBootstrapFile.replace(self.scriptDir, "<script-dir>")
+
         print(headingLine)
         print(f"{indent}Script Directory    -> {self.scriptDir}")
         print(f"{indent}Script Name         -> {self.scriptName}")
-        print(f"{indent}Scan Directory      -> {self.scanDir}")
-        print(f"{indent}Recursion           -> {re}")
-        print(f"{indent}Recursion Depth     -> {rd}")
-        print(f"{indent}Output Path         -> {self.outputDir}")
-        print(f"{indent}Library (Bootstrap) -> {self.libBootstrapFile}")
+        print(f"{indent}Scan Directory      *> {self.scanDir}")
+        print(f"{indent}Recursion           *> {re}")
+        print(f"{indent}Recursion Depth     *> {rd}")
+        print(f"{indent}Output Path         *> {self.outputDir}")
+        print(f"{indent}Library (Bootstrap) -> {bsf}")
 
         while (appendBlankLines > 0):
             print("")
