@@ -7,12 +7,13 @@ from _internal.web         import  *
 arguments = Arguments()
 arguments.print(
     headingLine = "Using parameters for processing:",
-    indent = "  > ",
-    appendBlankLines = 2)
+    indent = " > ",
+    appendBlankLines = 1)
 
-# Processing desired files
+# Processing files
 print("Processing Files")
 print("----------------")
+
 for file in getDesiredFiles(arguments, ".ubd"):
-    print(f"    Processing: {file}")
+    print(f"Parsing {file}")
 
