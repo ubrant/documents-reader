@@ -1,12 +1,12 @@
-from _internal.args        import  *
+from _internal.settings    import  *
 from _internal.recursion   import  *
 from _internal.parser      import  *
 from _internal.web         import  *
 
-# Getting the command-line arguments
-arguments = Arguments()
-arguments.print(
-    headingLine = "Using parameters for processing:",
+# Global Settings
+settings = Settings()
+settings.print(
+    headingLine = "Using settings for processing:",
     indent = " > ",
     appendBlankLines = 1)
 
@@ -14,6 +14,6 @@ arguments.print(
 print("Processing Files")
 print("----------------")
 
-for file in getDesiredFiles(arguments, ".ubd"):
+for file in getDesiredFiles(settings, ".ubd"):
     print(f"Parsing {file}")
 

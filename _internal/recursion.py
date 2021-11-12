@@ -1,9 +1,9 @@
-from os             import listdir
-from os.path        import isfile
-from os.path        import isdir
-from os.path        import join
+from os                 import listdir
+from os.path            import isfile
+from os.path            import isdir
+from os.path            import join
 
-from _internal.args import Arguments
+from _internal.settings import Settings
 
 
 def getDirectories(directory, recursion = False, depth = 0):
@@ -31,7 +31,7 @@ def getFiles(directory, extension = ""):
     except:
         return f"<cannot access - {directory}>"
 
-def getDesiredFiles(arguments: Arguments, extension):
+def getDesiredFiles(arguments: Settings, extension):
     for dir in getDirectories(
                         arguments.directoryPath,
                         arguments.isRecursive,

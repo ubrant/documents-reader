@@ -7,7 +7,7 @@ from os    import getcwd
 #          2 => recursive-behavior [True/False]
 #          3 => recursion-depth    [1000 => infinite]
 ####
-class Arguments:
+class Settings:
     def __init__(self):
         self.scriptName = ""
         self.directoryPath = getcwd()
@@ -32,7 +32,7 @@ class Arguments:
         if(argv):
             value = argv.pop(0).lstrip().rstrip().lower()
 
-            if(value == "false"):
+            if(value == "false" or value == "0"):
                 self.isRecursive = False
             else:
                 self.isRecursive = True
