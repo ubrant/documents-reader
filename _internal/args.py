@@ -49,13 +49,19 @@ class Arguments:
             argv.pop()
         
 
-    def print(self, indent):
+    def print(self, headingLine, indent, appendBlankLines = 0):
         rd = self.recursionDepth
         if(rd == 1000):
             rd = "Infinite"
         
-        print(f"{indent}Script Name:       {self.scriptName}")
-        print(f"{indent}Directory Path:    {self.directoryPath}")
-        print(f"{indent}Recursion Enabled: {self.isRecursive}")
-        print(f"{indent}Recursion Depth:   {rd}")
+        print(headingLine)
+        print(f"{indent}Script Name       -> {self.scriptName}")
+        print(f"{indent}Directory Path    -> {self.directoryPath}")
+        print(f"{indent}Recursion Enabled -> {self.isRecursive}")
+        print(f"{indent}Recursion Depth   -> {rd}")
+
+        while (appendBlankLines > 0):
+            print("")
+            appendBlankLines = appendBlankLines - 1
+
         return

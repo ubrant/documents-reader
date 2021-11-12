@@ -4,13 +4,15 @@ from _internal.parser      import  *
 from _internal.web         import  *
 
 # Getting the command-line arguments
-print("Parameters:")
 arguments = Arguments()
-arguments.print("    ")
+arguments.print(
+    headingLine = "Using parameters for processing:",
+    indent = "  > ",
+    appendBlankLines = 2)
 
 # Processing desired files
-print("")
 print("Processing Files")
+print("----------------")
 for file in getDesiredFiles(arguments, ".ubd"):
     print(f"    Processing: {file}")
 
