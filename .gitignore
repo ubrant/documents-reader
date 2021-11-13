@@ -130,3 +130,6 @@ dmypy.json
 
 # Generated files
 Generated-Site/
+
+# Visual Studio
+.vs/
