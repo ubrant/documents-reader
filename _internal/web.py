@@ -1,10 +1,9 @@
 from _internal.settings       import Settings
-from _internal.parser         import Parser
+from _internal.parser         import ParsedData
 
 
 class WebContentGenerator:
-    def __init__(self, settings: Settings, parser: Parser):
-        parser.sortData()
+    def __init__(self, settings: Settings, data: ParsedData):
         pass
 
     def generateOutput(self):

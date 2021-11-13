@@ -20,6 +20,6 @@ for file in getDesiredFiles(settings, ".ubd"):
     parser.parseFile(file)
 
 # Generating Web Content
-webGenerator = WebContentGenerator(settings, parser)
+webGenerator = WebContentGenerator(settings, parser.getSortedData())
 webGenerator.generateOutput()
 webGenerator.openOutput()
