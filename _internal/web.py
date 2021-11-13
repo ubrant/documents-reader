@@ -3,7 +3,8 @@ from _internal.parser         import Parser
 
 
 class WebContentGenerator:
-    def __init__(self, settings: Settings, parser: Parser) -> None:
+    def __init__(self, settings: Settings, parser: Parser):
+        parser.sortData()
         pass
 
     def generateOutput(self):
