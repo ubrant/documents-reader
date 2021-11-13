@@ -1,7 +1,7 @@
-from _internal.settings    import  *
-from _internal.recursion   import  *
-from _internal.parser      import  *
-from _internal.web         import  *
+from _internal.settings    import  Settings
+from _internal.recursion   import  getDesiredFiles
+from _internal.parser      import  Parser
+from _internal.web         import  WebContentGenerator
 
 # Global Settings
 settings = Settings()
@@ -10,12 +10,16 @@ settings.print(
     indent = " > ",
     appendBlankLines = 1)
 
-# Processing files
+# Processing Files
 print("Processing Files")
 print("----------------")
 
-parsedData = Parser()
+parser = Parser()
 for file in getDesiredFiles(settings, ".ubd"):
     print(f"Parsing {file}")
-    parsedData.parseFile(file)
+    parser.parseFile(file)
 
+# Generating Web Content
+webGenerator = WebContentGenerator(settings, parser)
+webGenerator.generateOutput()
+webGenerator.openOutput()
