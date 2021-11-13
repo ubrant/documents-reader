@@ -4,5 +4,5 @@ It is a simple reader that checks validity of documentation files and generates 
 
 ## Documentation Format
 
-Format for valid documentation is maintained in it's own repository https://github.com/ubrant/documents-format
+Format for valid documentation is maintained in it's own [repository](https://github.com/ubrant/documents-format).
 
