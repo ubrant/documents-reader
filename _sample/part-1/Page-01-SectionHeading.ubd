@@ -1,0 +1,15 @@
+﻿
+~ IDs 100000 ➠ 199999 are reserved for non-technical groups
+~ IDs 200000 ➠ 299999 are reserved for technical groups
+@Major     200000    Learning Java
+@Minor     1         Basics of Java
+@Section   1         Before we begin
+@Page      1         Before we begin
+
+~ Section begins here
+$H1: Before We Begin
+$H2: Java is and is not for everyone
+$DT: People might tell you that Java is for everyone... they might be right if it were Year-1995, but it is not the case for sure.
+$QT: No thief, however skillful, can rob one of knowledge, and that is why knowledge is the best and safest treasure to acquire.
+$QB: L. Frank Baum
+$BG: Page-01-SectionImage.png

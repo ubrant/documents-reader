@@ -1,0 +1,20 @@
+﻿
+~ IDs 100000 ➠ 199999 are reserved for non-technical groups
+~ IDs 200000 ➠ 299999 are reserved for technical groups
+@Major     200000
+@Minor     1
+@Section   2         Question
+@Page      1         A simple question
+
+~ Here goes our question
+@Question
+    #Difficulty: Easy
+    #Text: Is Java from which company?
+    #OptA: Google
+    #OptB: Microsoft
+    #OptC: Oracle
+    #OptD: Apple
+    #Attempts: 1
+    #Answer: D
+    #Explanation: Java is from Oracle and Google is using it probably at the biggest scale in Android
+

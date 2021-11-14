@@ -1,0 +1,49 @@
+﻿
+~ IDs 100000 ➠ 199999 are reserved for non-technical groups
+~ IDs 200000 ➠ 299999 are reserved for technical groups
+@Major     200000
+@Minor     1
+@Section   1
+@Page      2         Who is this course for?
+
+#H1: Who is this course for?
+
+#Para: I commonly hear it like a term (from my colleagues - mostly) that {xyz programming language} is fit for everyone, but I tend to differ this mindset - one tool fit for all purposes.
+
+#Para: Everyone has his own perception, and that is /fine/, so is the case here. People tend to resonate with their own preferences. There used to be a time when only {/machine-level/} programming had to be used to program computers, at that time people had no better choices to express themselves to their machines. Now the case is different, you can choose from a vast variety of programming  languages. But hold on... it is not the full story by any means.
+
+#Para: Have you ever thought about purposes of all these proliferated programming languages, trying to attract generic audience like us by showing that how easy it is to learn their created language and how easy it is to "{program}" computers using their creations.
+
+This all confuses novices in choosing right tools for themselves.
+
+
+
+#H2: What should I learn then?
+
+#Para: Point here is: There is a vast number of form-factor available to be programmed.
+You can program very small devices, like {micro-controllers} that have just few killobytes of RAM, and similar amount of ROM to save your code, for example a remote-control.
+
+On the other hand, there are available Super Computers (probably Super Duper Computers), that you never bother about overcoming their resources.
+
+#Para: This all spectrum tells us to first find out what we want to do when we learn any programming language. Then you might get a list of languages that can be used to serve that specific purpose. Then you can choose from them to isolate the language that can serve that specific purpose as well as can be utilized somewhere else.
+
+#H2: Is Java fit for me?
+
+#Para: If you belong to following categories then the answer is resounding YES; otherwise it is yes without resounds:
+
+#List:
+You want to write code that runs on multiple form-factor
+You want to write Android Applications
+You wanna target Linux machines without having to bother about nitty-gritties
+
+
+
+#Image: [Java is not so simple though powerful, so be ready to toil to gain power...](module-graph.png)
+
+#Para: In short - Java is a powerful language, certainly it'll become easier to program when you get used to it... to be honest, it is like a "Right Hand Rule" that any skill requires 10000 hours to master.
+
+#Para: Here is the official :Link-URL:[link to][Java home](https://www.java.com/en/) home page of Java.
+
+#Para: If you have found that Java is not for you, you may :Link-Site:[checkout][Other material]() other material we have got for you.
+
+#Para: Here is a :Link-Site:[simple question][a simple question](200000, 1, 2, 1)  for you, that won't take long.
