@@ -1,3 +1,5 @@
+from _internal.parsing_helpers import *
+
 from re import sub
 
 class ParsedData:
@@ -7,20 +9,6 @@ class ParsedData:
     def sort(me):
         return me
 
-
-def getFolderFromFileName(filename: str) -> str:
-    tmp = sub("/[^/]*$", "", filename)
-    return sub("\\\\[^\\\\]*$", "", tmp)
-
-def readFileWithLineNumbers(filename: str) -> (int, str):
-    f = open(filename)
-    ln = 0
-    for line in f:
-        ln += 1
-        yield (ln, sub("\r", "", sub("\n", "", line)))
-
-    f.close()
-
 class Parser:
     def __init__(self):
         self.data = ParsedData()
@@ -28,7 +16,8 @@ class Parser:
     def loadFile(self, filename: str):
         foldername = getFolderFromFileName(filename)
         for ln, l in readFileWithLineNumbers(filename):
-            print(f"{ln}: {l}")
+            if l.lstrip().startswith("~") == False and l.lstrip().rstrip() != "":
+                print(f"{ln}: {l}")
         
         return
     
