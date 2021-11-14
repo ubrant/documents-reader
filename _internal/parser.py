@@ -14,16 +14,16 @@ def getFolderFromFileName(filename: str) -> str:
 
 def readFileWithLineNumbers(filename: str) -> (int, str):
     f = open(filename)
-    lineNumber = 0
+    ln = 0
     for line in f:
-        lineNumber += 1
-        yield (lineNumber, sub("\r", "", sub("\n", "", line)))
+        ln += 1
+        yield (ln, sub("\r", "", sub("\n", "", line)))
 
     f.close()
 
 class Parser:
     def __init__(self):
-        self.elements = ParsedData()
+        self.data = ParsedData()
 
     def loadFile(self, filename: str):
         foldername = getFolderFromFileName(filename)
@@ -33,4 +33,4 @@ class Parser:
         return
     
     def getParsedData(self) -> type(ParsedData):
-        return self.elements.sort()
+        return self.data.sort()
