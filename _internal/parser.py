@@ -17,7 +17,9 @@ def readFileWithLineNumbers(filename: str) -> (int, str):
     lineNumber = 0
     for line in f:
         lineNumber += 1
-        yield (lineNumber, sub("\r", "", sub("\n", "", sub("\r\n", "", line))))
+        yield (lineNumber, sub("\r", "", sub("\n", "", line)))
+
+    f.close()
 
 class Parser:
     def __init__(self):
