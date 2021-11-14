@@ -1,6 +1,7 @@
 from _internal.parsing_helpers import *
 
-from re import sub
+from typing                    import Type
+from re                        import sub
 
 class ParsedData:
     def __init__(me):
@@ -21,5 +22,5 @@ class Parser:
         
         return
     
-    def getParsedData(self) -> type(ParsedData):
+    def getParsedData(self) -> Type[ParsedData]:
         return self.data.sort()

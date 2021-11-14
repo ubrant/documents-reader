@@ -1,7 +1,7 @@
-from typing           import Tuple
+from typing           import Tuple, Type
 from re               import sub
 
-def getFolderFromFileName(filename: str) -> str:
+def getFolderFromFileName(filename: str) -> Type[str]:
     tmp = sub("/[^/]*$", "", filename)
     return sub("\\\\[^\\\\]*$", "", tmp)
 
