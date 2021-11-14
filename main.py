@@ -16,10 +16,10 @@ print("----------------")
 
 parser = Parser()
 for file in getDesiredFiles(settings, ".ubd"):
-    print(f"Parsing {file}")
-    parser.parseFile(file)
+    print(f"Reading {file}")
+    parser.loadFile(file)
 
 # Generating Web Content
-webGenerator = WebContentGenerator(settings, parser.getSortedData())
+webGenerator = WebContentGenerator(settings, parser.getParsedData())
 webGenerator.generateOutput()
 webGenerator.openOutput()

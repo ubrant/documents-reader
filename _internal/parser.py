@@ -1,3 +1,5 @@
+from re import sub
+
 class ParsedData:
     def __init__(me):
         pass
@@ -6,19 +8,27 @@ class ParsedData:
         return me
 
 
+def getFolderFromFileName(filename: str) -> str:
+    tmp = sub("/[^/]*$", "", filename)
+    return sub("\\\\[^\\\\]*$", "", tmp)
+
+def readFileWithLineNumbers(filename: str) -> (int, str):
+    f = open(filename)
+    lineNumber = 0
+    for line in f:
+        lineNumber += 1
+        yield (lineNumber, sub("\r", "", sub("\n", "", sub("\r\n", "", line))))
+
 class Parser:
     def __init__(self):
-        self.parsedData = ParsedData()
-        self.sortedData = None
-        pass
+        self.elements = ParsedData()
 
-    def parseFile(self, filename: str):
-        self.sortedData = None
-        pass
+    def loadFile(self, filename: str):
+        foldername = getFolderFromFileName(filename)
+        for ln, l in readFileWithLineNumbers(filename):
+            print(f"{ln}: {l}")
         
-    def getSortedData(self) -> type(ParsedData):
-        if (self.sortedData == None):
-            self.sortedData = self.parsedData
-            return self.sortedData.sort()
-
-        return self.parsedData.sortedData()
+        return
+    
+    def getParsedData(self) -> type(ParsedData):
+        return self.elements.sort()
