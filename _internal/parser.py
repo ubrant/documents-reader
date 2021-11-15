@@ -1,26 +1,20 @@
 from _internal.parsing_helpers import *
+from _internal.data_elements   import *
 
 from typing                    import Type
 from re                        import sub
 
-class ParsedData:
-    def __init__(me):
-        pass
-    
-    def sort(me):
-        return me
-
 class Parser:
-    def __init__(self):
-        self.data = ParsedData()
+    def __init__(self) -> None:
+        self.data = Data()
 
     def loadFile(self, filename: str):
         foldername = getFolderFromFileName(filename)
         for ln, l in readFileWithLineNumbers(filename):
             if l.lstrip().startswith("~") == False and l.lstrip().rstrip() != "":
-                print(f"{ln}: {l}")
+                self.data.processTextLine(foldername, filename, ln, l)
         
         return
     
-    def getParsedData(self) -> Type[ParsedData]:
+    def getParsedData(self) -> Type[Data]:
         return self.data.sort()
