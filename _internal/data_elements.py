@@ -23,6 +23,16 @@ class Section:
         self.pages = []
         return
 
+    def getOrAddNewPageElementById(self, id: int) -> Page:
+        for page in self.pages:
+            if (page.id == id):
+                return page
+        
+        page = Page()
+        page.id = id
+        self.pages.append(page)
+        return page
+
     def setTitleIfEmpty(self, title: str) -> bool:
         if (self.title == ""):
             self.title = title
@@ -60,6 +70,16 @@ class Minor:
         self.title = ""
         self.sections = []
         return
+
+    def getOrAddNewSectionElementById(self, id: int) -> Section:
+        for section in self.sections:
+            if (section.id == id):
+                return section
+        
+        section = Section()
+        section.id = id
+        self.sections.append(section)
+        return section
 
     def setTitleIfEmpty(self, title: str) -> bool:
         if (self.title == ""):
@@ -99,6 +119,16 @@ class Major:
         self.minors = []
         return
 
+    def getOrAddNewMinorElementById(self, id: int) -> Minor:
+        for minor in self.minors:
+            if (minor.id == id):
+                return minor
+        
+        minor = Minor()
+        minor.id = id
+        self.minors.append(minor)
+        return minor
+
     def setTitleIfEmpty(self, title: str) -> bool:
         if (self.title == ""):
             self.title = title
@@ -134,9 +164,66 @@ class Major:
 # - Data is segregated into Major partitions
 ####
 class Data:
+    DEFAULT_MAJOR_ELEMENT_ID = 0
+    DEFAULT_MINOR_ELEMENT_ID = 0
+    DEFAULT_SECTION_ELEMENT_ID = 0
+    DEFAULT_PAGE_ELEMENT_ID = 0
+    
     def __init__(my) -> None:
         my.majors = []
+        my.lastProcessedFilename = ""
+        my.currentMajorElementId = Data.DEFAULT_MAJOR_ELEMENT_ID
+        my.currentMinorElementId = Data.DEFAULT_MINOR_ELEMENT_ID
+        my.currentSectionElementId = Data.DEFAULT_SECTION_ELEMENT_ID
+        my.currentPageElementId = Data.DEFAULT_PAGE_ELEMENT_ID
         return
+
+    def updateProcessingState(my,
+                    updateFilename: str = None,
+                    updateMajorElementId: int = None,
+                    updateMinorElementId: int = None,
+                    updateSectionElementId: int = None,
+                    updatePageElementId: int = None) -> None:
+        
+        if (updateFilename != None and
+            my.lastProcessedFilename != updateFilename):
+            my.lastProcessedFilename = updateFilename
+            my.currentMajorElementId = Data.DEFAULT_MAJOR_ELEMENT_ID
+            my.currentMinorElementId = Data.DEFAULT_MINOR_ELEMENT_ID
+            my.currentSectionElementId = Data.DEFAULT_SECTION_ELEMENT_ID
+            my.currentPageElementId = Data.DEFAULT_PAGE_ELEMENT_ID
+        
+        if (updateMajorElementId != None):
+            my.currentMajorElementId = updateMajorElementId
+
+        if (updateMinorElementId != None):
+            my.currentMinorElementId = updateMinorElementId
+
+        if (updateSectionElementId != None):
+            my.currentSectionElementId = updateSectionElementId
+
+        if (updatePageElementId != None):
+            my.currentPageElementId = updatePageElementId
+        
+        return
+
+    def resetProcessingState(my) -> None:
+        my.lastProcessedFilename = ""
+        my.currentMajorElementId = Data.DEFAULT_MAJOR_ELEMENT_ID
+        my.currentMinorElementId = Data.DEFAULT_MINOR_ELEMENT_ID
+        my.currentSectionElementId = Data.DEFAULT_SECTION_ELEMENT_ID
+        my.currentPageElementId = Data.DEFAULT_PAGE_ELEMENT_ID
+        return
+    
+    def getOrAddNewMajorElementById(my, id: int) -> Major:
+        for major in my.majors:
+            if (major.id == id):
+                return major
+        
+        major = Major()
+        major.id = id
+        my.majors.append(major)
+        return major
     
     def sort(me):
         temp = []

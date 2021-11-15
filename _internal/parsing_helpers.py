@@ -48,7 +48,8 @@ def getSecondAndRestOfString(string: str) -> Tuple[str, str]:
 ######################################################################
 #                     Parsing Elements From Text                     #
 ######################################################################
-#
+
+######
 # Parsing Major Elements
 ####
 def processMajorElement(
@@ -59,7 +60,14 @@ def processMajorElement(
     
     if (lineText.lstrip().lower().startswith("@major")):
         idString, titleString = getSecondAndRestOfString(lineText)
-        print(f"id = {idString}, title = {titleString}")
+        id = 0
+        try:
+            id = int(idString)
+            me = data.getOrAddNewMajorElementById(id)
+            me.setTitleIfEmpty(titleString)
+            data.updateProcessingState(None, id, None, None, None)
+        except:
+            print(f"Error: Cannot parse Id at line#{lineNumber} in {filename}")
         return True
     return False
 
@@ -73,6 +81,16 @@ def processMinorElement(
                 lineNumber: int, lineText: str) -> bool:
     
     if (lineText.lstrip().lower().startswith("@minor")):
+        idString, titleString = getSecondAndRestOfString(lineText)
+        id = 0
+        try:
+            id = int(idString)
+            major = data.getOrAddNewMajorElementById(data.currentMajorElementId)
+            me = major.getOrAddNewMinorElementById(id)
+            me.setTitleIfEmpty(titleString)
+            data.updateProcessingState(None, None, id, None, None)
+        except:
+            print(f"Error: Cannot parse Id at line#{lineNumber} in {filename}")
         return True
     return False
 
@@ -86,6 +104,17 @@ def processSectionElement(
                 lineNumber: int, lineText: str) -> bool:
     
     if (lineText.lstrip().lower().startswith("@section")):
+        idString, titleString = getSecondAndRestOfString(lineText)
+        id = 0
+        try:
+            id = int(idString)
+            major = data.getOrAddNewMajorElementById(data.currentMajorElementId)
+            minor = major.getOrAddNewMinorElementById(data.currentMinorElementId)
+            se = minor.getOrAddNewSectionElementById(id)
+            se.setTitleIfEmpty(titleString)
+            data.updateProcessingState(None, None, None, id, None)
+        except:
+            print(f"Error: Cannot parse Id at line#{lineNumber} in {filename}")
         return True
     return False
 
@@ -99,6 +128,18 @@ def processPageElement(
                 lineNumber: int, lineText: str) -> bool:
     
     if (lineText.lstrip().lower().startswith("@page")):
+        idString, titleString = getSecondAndRestOfString(lineText)
+        id = 0
+        try:
+            id = int(idString)
+            major = data.getOrAddNewMajorElementById(data.currentMajorElementId)
+            minor = major.getOrAddNewMinorElementById(data.currentMinorElementId)
+            sectn = minor.getOrAddNewSectionElementById(data.currentSectionElementId)
+            pg = sectn.getOrAddNewPageElementById(id)
+            pg.setTitleIfEmpty(titleString)
+            data.updateProcessingState(None, None, None, None, id)
+        except:
+            print(f"Error: Cannot parse Id at line#{lineNumber} in {filename}")
         return True
     return False
 
@@ -116,6 +157,10 @@ def parseDataLine(
                 foldername: str,
                 filename: str,
                 lineNumber: int, lineText: str) -> None:
+    
+    if (filename != data.lastProcessedFilename):
+        data.updateProcessingState(filename, None, None, None, None)
+    
     for p in processPipeline:
         success = p(data, foldername, filename, lineNumber, lineText)
         if success:
