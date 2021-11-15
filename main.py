@@ -35,7 +35,7 @@ print("")
 print(".")
 print("...")
 print(".....")
-print(f"Completed")
+print("Completed")
 
 if (et < 1.0):
     print(f"Total Run-time = {et*1000:0.2f}ms")
