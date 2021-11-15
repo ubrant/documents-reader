@@ -12,7 +12,7 @@ class Parser:
         foldername = getFolderFromFileName(filename)
         for ln, l in readFileWithLineNumbers(filename):
             if l.lstrip().startswith("~") == False and l.lstrip().rstrip() != "":
-                insertDataLine(self.data, foldername, filename, ln, l)
+                parseDataLine(self.data, foldername, filename, ln, l)
         
         return
     

@@ -16,7 +16,8 @@ def readFileWithLineNumbers(filename: str) -> Tuple[int, str]:
 
     f.close()
     return
-def insertDataLine(
+
+def parseDataLine(
                 data: Data,
                 foldername: str,
                 filename: str,
