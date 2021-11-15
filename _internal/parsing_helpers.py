@@ -163,58 +163,58 @@ def processPageTextElements(
                 filename: str,
                 lineNumber: int, lineText: str) -> bool:
     
-    ltLine = lineText.lstrip().lower()
-    string = getSecondRestOfString(lineText)
+    trimmedLowercaseLine = trimLR(lineText).lower()
+    secondHalfLine = getSecondRestOfString(lineText)
     page = data.getActivePage()
 
     # Section Tags
-    if (ltLine.startswith("$h1:")):
+    if (trimmedLowercaseLine.startswith("$h1:")):
         return True
 
-    if (ltLine.startswith("$h2:")):
+    if (trimmedLowercaseLine.startswith("$h2:")):
         return True
 
-    if (ltLine.startswith("$dt:")):
+    if (trimmedLowercaseLine.startswith("$dt:")):
         return True
 
-    if (ltLine.startswith("$qt:")):
+    if (trimmedLowercaseLine.startswith("$qt:")):
         return True
 
-    if (ltLine.startswith("$qb:")):
+    if (trimmedLowercaseLine.startswith("$qb:")):
         return True
 
-    if (ltLine.startswith("$bg:")):
+    if (trimmedLowercaseLine.startswith("$bg:")):
         return True
 
     # Heading Tags
-    if (ltLine.startswith("#h1:")):
+    if (trimmedLowercaseLine.startswith("#h1:")):
         return True
 
-    if (ltLine.startswith("#h2:")):
+    if (trimmedLowercaseLine.startswith("#h2:")):
         return True
 
-    if (ltLine.startswith("#h3:")):
+    if (trimmedLowercaseLine.startswith("#h3:")):
         return True
 
-    if (ltLine.startswith("#h4:")):
+    if (trimmedLowercaseLine.startswith("#h4:")):
         return True
 
-    if (ltLine.startswith("#h5:")):
+    if (trimmedLowercaseLine.startswith("#h5:")):
         return True
 
-    if (ltLine.startswith("#h6:")):
+    if (trimmedLowercaseLine.startswith("#h6:")):
         return True
 
     # Paragraph Tag
-    if (ltLine.startswith("#para:")):
+    if (trimmedLowercaseLine.startswith("#para:")):
         return True
 
     # List Tag
-    if (ltLine.startswith("#list:")):
+    if (trimmedLowercaseLine.startswith("#list:")):
         return True
 
     # Image Tag
-    if (ltLine.startswith("#image:")):
+    if (trimmedLowercaseLine.startswith("#image:")):
         return True
     
     return page.appendText(lineText)
