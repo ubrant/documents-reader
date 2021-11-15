@@ -30,6 +30,9 @@ webGenerator.openOutput()
 
 # Time Elapsed
 et = (datetime.now() - startTime).total_seconds()
+
+print("")
+print(".")
 print("...")
 print(".....")
 print(f"Completed")
