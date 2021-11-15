@@ -3,10 +3,9 @@ from _internal.data_elements   import *
 from typing                    import Tuple, Type
 from re                        import sub
 
-def getFolderFromFileName(filename: str) -> Type[str]:
-    tmp = sub("/[^/]*$", "", filename)
-    return sub("\\\\[^\\\\]*$", "", tmp)
-
+######
+# File Reading
+####
 def readFileWithLineNumbers(filename: str) -> Tuple[int, str]:
     f = open(filename, "rU", 4096, "utf-8-sig")
     ln = 0
@@ -17,6 +16,16 @@ def readFileWithLineNumbers(filename: str) -> Tuple[int, str]:
     f.close()
     return
 
+######
+# Extractors
+####
+def stripLastPartFromPath(filename: str) -> Type[str]:
+    tmp = sub("/[^/]*$", "", filename)
+    return sub("\\\\[^\\\\]*$", "", tmp)
+
+######
+# Parsing Pipeline
+####
 def parseDataLine(
                 data: Data,
                 foldername: str,

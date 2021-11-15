@@ -9,7 +9,7 @@ class Parser:
         self.data = Data()
 
     def loadFile(self, filename: str):
-        foldername = getFolderFromFileName(filename)
+        foldername = stripLastPartFromPath(filename)
         for ln, l in readFileWithLineNumbers(filename):
             if l.lstrip().startswith("~") == False and l.lstrip().rstrip() != "":
                 parseDataLine(self.data, foldername, filename, ln, l)
