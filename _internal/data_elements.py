@@ -117,11 +117,3 @@ class Data:
         # Replacing and returning
         me.majors = temp
         return me
-
-def insertDataLine(
-                data: Data,
-                foldername: str,
-                filename: str,
-                lineNumber: int, lineText: str) -> None:
-    print(f"{lineNumber}->{lineText}")
-    return

@@ -1,5 +1,7 @@
-from typing           import Tuple, Type
-from re               import sub
+from _internal.data_elements   import *
+
+from typing                    import Tuple, Type
+from re                        import sub
 
 def getFolderFromFileName(filename: str) -> Type[str]:
     tmp = sub("/[^/]*$", "", filename)
@@ -14,3 +16,11 @@ def readFileWithLineNumbers(filename: str) -> Tuple[int, str]:
 
     f.close()
     return
+def insertDataLine(
+                data: Data,
+                foldername: str,
+                filename: str,
+                lineNumber: int, lineText: str) -> None:
+    print(f"{lineNumber}->{lineText}")
+    return
+
