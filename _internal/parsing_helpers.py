@@ -34,8 +34,10 @@ def processMajorElement(
                 foldername: str,
                 filename: str,
                 lineNumber: int, lineText: str) -> bool:
-    print(f"{lineNumber}->{lineText}")
-    return
+    
+    if (lineText.lstrip().lower().startswith("@major")):
+        return True
+    return False
 
 ######
 # Parsing Minor Elements
@@ -45,8 +47,10 @@ def processMinorElement(
                 foldername: str,
                 filename: str,
                 lineNumber: int, lineText: str) -> bool:
-    print(f"{lineNumber}->{lineText}")
-    return
+    
+    if (lineText.lstrip().lower().startswith("@minor")):
+        return True
+    return False
 
 ######
 # Parsing Section Elements
@@ -56,8 +60,10 @@ def processSectionElement(
                 foldername: str,
                 filename: str,
                 lineNumber: int, lineText: str) -> bool:
-    print(f"{lineNumber}->{lineText}")
-    return
+    
+    if (lineText.lstrip().lower().startswith("@section")):
+        return True
+    return False
 
 ######
 # Parsing Page Elements
@@ -67,8 +73,10 @@ def processPageElement(
                 foldername: str,
                 filename: str,
                 lineNumber: int, lineText: str) -> bool:
-    print(f"{lineNumber}->{lineText}")
-    return
+    
+    if (lineText.lstrip().lower().startswith("@page")):
+        return True
+    return False
 
 ######
 # Parsing Pipeline
