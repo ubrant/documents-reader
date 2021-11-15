@@ -1,15 +1,33 @@
+######
+# Page Elements
+####
 class Page:
     def __init__(self) -> None:
         self.id = 0
         self.title = ""
         return
 
+    def setTitleIfEmpty(self, title: str) -> bool:
+        if (self.title == ""):
+            self.title = title
+            return True
+        return False
+
+######
+# Section Element
+####
 class Section:
     def __init__(self) -> None:
         self.id = 0
         self.title = ""
         self.pages = []
         return
+
+    def setTitleIfEmpty(self, title: str) -> bool:
+        if (self.title == ""):
+            self.title = title
+            return True
+        return False
 
     def sort(self):
         temp = []
@@ -33,12 +51,21 @@ class Section:
         self.pages = temp
         return self
 
+######
+# Minor Element
+####
 class Minor:
     def __init__(self) -> None:
         self.id = 0
         self.title = ""
         self.sections = []
         return
+
+    def setTitleIfEmpty(self, title: str) -> bool:
+        if (self.title == ""):
+            self.title = title
+            return True
+        return False
 
     def sort(self):
         temp = []
@@ -62,12 +89,21 @@ class Minor:
         self.sections = temp
         return self
 
+######
+# Major Element
+####
 class Major:
     def __init__(self) -> None:
         self.id = 0
         self.title = ""
         self.minors = []
         return
+
+    def setTitleIfEmpty(self, title: str) -> bool:
+        if (self.title == ""):
+            self.title = title
+            return True
+        return False
 
     def sort(self):
         temp = []
@@ -91,6 +127,12 @@ class Major:
         self.minors = temp
         return self
 
+######
+# Combined Data
+# -------------
+# 
+# - Data is segregated into Major partitions
+####
 class Data:
     def __init__(my) -> None:
         my.majors = []
