@@ -1,6 +1,43 @@
 ######
 # Page Elements
 ####
+class ElementId:
+    PAGE_ELEMENT_NONE = 0
+    # Section Element
+    PAGE_ELEMENT_SECTION_H1          = 1
+    PAGE_ELEMENT_SECTION_H2          = 2
+    PAGE_ELEMENT_SECTION_DESCRIPTION = 3
+    PAGE_ELEMENT_SECTION_QUOTE       = 4
+    PAGE_ELEMENT_SECTION_QUOTE_BY    = 5
+    PAGE_ELEMENT_SECTION_BACKGROUND  = 6
+    # Headings
+    PAGE_ELEMENT_H1 = 11
+    PAGE_ELEMENT_H2 = 12
+    PAGE_ELEMENT_H3 = 13
+    PAGE_ELEMENT_H4 = 14
+    PAGE_ELEMENT_H5 = 15
+    PAGE_ELEMENT_H6 = 16
+    # Para
+    PAGE_ELEMENT_PARA = 21
+    # Unordered List
+    PAGE_ELEMENT_UNORDERED_LIST = 31
+    # Image
+    PAGE_ELEMENT_IMAGE = 41
+    # Styling
+    PAGE_ELEMENT_BEGIN_BOLD = 61
+    PAGE_ELEMENT_END_BOLD = 62
+    PAGE_ELEMENT_BEGIN_ITALIC = 63
+    PAGE_ELEMENT_END_ITALIC = 64
+    # Link
+    PAGE_ELEMENT_LINK_URL = 71
+    PAGE_ELEMENT_LINK_DOCUMENTATION = 72
+
+class TextElement:
+    def __init__(self) -> None:
+        self.textType = ElementId.TEXT_ELEMENT_NONE
+        self.text = ""
+        return
+
 class Page:
     def __init__(self) -> None:
         self.id = 0
