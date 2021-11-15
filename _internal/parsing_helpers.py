@@ -17,20 +17,76 @@ def readFileWithLineNumbers(filename: str) -> Tuple[int, str]:
     return
 
 ######
-# Extractors
+# Common Extractors
 ####
 def stripLastPartFromPath(filename: str) -> Type[str]:
     tmp = sub("/[^/]*$", "", filename)
     return sub("\\\\[^\\\\]*$", "", tmp)
 
+######################################################################
+#                     Parsing Elements From Text                     #
+######################################################################
+#
+# Parsing Major Elements
+####
+def processMajorElement(
+                data: Data,
+                foldername: str,
+                filename: str,
+                lineNumber: int, lineText: str) -> bool:
+    print(f"{lineNumber}->{lineText}")
+    return
+
+######
+# Parsing Minor Elements
+####
+def processMinorElement(
+                data: Data,
+                foldername: str,
+                filename: str,
+                lineNumber: int, lineText: str) -> bool:
+    print(f"{lineNumber}->{lineText}")
+    return
+
+######
+# Parsing Section Elements
+####
+def processSectionElement(
+                data: Data,
+                foldername: str,
+                filename: str,
+                lineNumber: int, lineText: str) -> bool:
+    print(f"{lineNumber}->{lineText}")
+    return
+
+######
+# Parsing Page Elements
+####
+def processPageElement(
+                data: Data,
+                foldername: str,
+                filename: str,
+                lineNumber: int, lineText: str) -> bool:
+    print(f"{lineNumber}->{lineText}")
+    return
+
 ######
 # Parsing Pipeline
 ####
+processPipeline = [
+    processMajorElement,
+    processMinorElement,
+    processSectionElement,
+    processPageElement
+]
 def parseDataLine(
                 data: Data,
                 foldername: str,
                 filename: str,
                 lineNumber: int, lineText: str) -> None:
-    print(f"{lineNumber}->{lineText}")
+    for p in processPipeline:
+        success = p(data, foldername, filename, lineNumber, lineText)
+        if success:
+            break
     return
 
