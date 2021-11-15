@@ -13,6 +13,9 @@ class Page:
             return True
         return False
 
+    def appendText(self, lineText: str) -> bool:
+        return True
+
 ######
 # Section Element
 ####
@@ -225,6 +228,12 @@ class Data:
         my.majors.append(major)
         return major
     
+    def getActivePage(my) -> Page:
+        return (my.getOrAddNewMajorElementById(my.currentMajorElementId)
+                  .getOrAddNewMinorElementById(my.currentMinorElementId)
+                  .getOrAddNewSectionElementById(my.currentSectionElementId)
+                  .getOrAddNewPageElementById(my.currentPageElementId))
+
     def sort(me):
         temp = []
         minId = 0

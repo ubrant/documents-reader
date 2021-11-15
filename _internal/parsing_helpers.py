@@ -29,7 +29,7 @@ def trimLR(string: str) -> Type[str]:
 def trimMultipleSpaces(string: str) -> Type[str]:
     return sub("\s\s*", " ", string)
 
-def getSecondAndRestOfString(string: str) -> Tuple[str, str]:
+def getSecondAndThirdRestOfString(string: str) -> Tuple[str, str]:
     string = trimLR(string)
     string = trimMultipleSpaces(string)
     parts = string.split()
@@ -45,6 +45,20 @@ def getSecondAndRestOfString(string: str) -> Tuple[str, str]:
             rest += " " + p
         return (trimLR(parts[1]), trimLR(trimMultipleSpaces(rest)))
 
+def getSecondRestOfString(string: str) -> Type[str]:
+    string = trimLR(string)
+    string = trimMultipleSpaces(string)
+    parts = string.split()
+    numParts = len(parts)
+
+    if (numParts <= 1):
+        return ""
+    else:
+        rest = ""
+        for p in parts[1:]:
+            rest += " " + p
+        return trimLR(rest)
+
 ######################################################################
 #                     Parsing Elements From Text                     #
 ######################################################################
@@ -52,14 +66,14 @@ def getSecondAndRestOfString(string: str) -> Tuple[str, str]:
 ######
 # Parsing Major Elements
 ####
-def processMajorElement(
+def processMajorIdElement(
                 data: Data,
                 foldername: str,
                 filename: str,
                 lineNumber: int, lineText: str) -> bool:
     
     if (lineText.lstrip().lower().startswith("@major")):
-        idString, titleString = getSecondAndRestOfString(lineText)
+        idString, titleString = getSecondAndThirdRestOfString(lineText)
         id = 0
         try:
             id = int(idString)
@@ -74,14 +88,14 @@ def processMajorElement(
 ######
 # Parsing Minor Elements
 ####
-def processMinorElement(
+def processMinorIdElement(
                 data: Data,
                 foldername: str,
                 filename: str,
                 lineNumber: int, lineText: str) -> bool:
     
     if (lineText.lstrip().lower().startswith("@minor")):
-        idString, titleString = getSecondAndRestOfString(lineText)
+        idString, titleString = getSecondAndThirdRestOfString(lineText)
         id = 0
         try:
             id = int(idString)
@@ -97,14 +111,14 @@ def processMinorElement(
 ######
 # Parsing Section Elements
 ####
-def processSectionElement(
+def processSectionIdElement(
                 data: Data,
                 foldername: str,
                 filename: str,
                 lineNumber: int, lineText: str) -> bool:
     
     if (lineText.lstrip().lower().startswith("@section")):
-        idString, titleString = getSecondAndRestOfString(lineText)
+        idString, titleString = getSecondAndThirdRestOfString(lineText)
         id = 0
         try:
             id = int(idString)
@@ -121,14 +135,14 @@ def processSectionElement(
 ######
 # Parsing Page Elements
 ####
-def processPageElement(
+def processPageIdElement(
                 data: Data,
                 foldername: str,
                 filename: str,
                 lineNumber: int, lineText: str) -> bool:
     
     if (lineText.lstrip().lower().startswith("@page")):
-        idString, titleString = getSecondAndRestOfString(lineText)
+        idString, titleString = getSecondAndThirdRestOfString(lineText)
         id = 0
         try:
             id = int(idString)
@@ -143,14 +157,77 @@ def processPageElement(
         return True
     return False
 
+def processPageTextElements(
+                data: Data,
+                foldername: str,
+                filename: str,
+                lineNumber: int, lineText: str) -> bool:
+    
+    ltLine = lineText.lstrip().lower()
+    string = getSecondRestOfString(lineText)
+    page = data.getActivePage()
+
+    # Section Tags
+    if (ltLine.startswith("$h1:")):
+        return True
+
+    if (ltLine.startswith("$h2:")):
+        return True
+
+    if (ltLine.startswith("$dt:")):
+        return True
+
+    if (ltLine.startswith("$qt:")):
+        return True
+
+    if (ltLine.startswith("$qb:")):
+        return True
+
+    if (ltLine.startswith("$bg:")):
+        return True
+
+    # Heading Tags
+    if (ltLine.startswith("#h1:")):
+        return True
+
+    if (ltLine.startswith("#h2:")):
+        return True
+
+    if (ltLine.startswith("#h3:")):
+        return True
+
+    if (ltLine.startswith("#h4:")):
+        return True
+
+    if (ltLine.startswith("#h5:")):
+        return True
+
+    if (ltLine.startswith("#h6:")):
+        return True
+
+    # Paragraph Tag
+    if (ltLine.startswith("#para:")):
+        return True
+
+    # List Tag
+    if (ltLine.startswith("#list:")):
+        return True
+
+    # Image Tag
+    if (ltLine.startswith("#image:")):
+        return True
+    
+    return page.appendText(lineText)
+
 ######
 # Parsing Pipeline
 ####
 processPipeline = [
-    processMajorElement,
-    processMinorElement,
-    processSectionElement,
-    processPageElement
+    processMajorIdElement,
+    processMinorIdElement,
+    processSectionIdElement,
+    processPageIdElement,
+    processPageTextElements
 ]
 def parseDataLine(
                 data: Data,
@@ -161,9 +238,14 @@ def parseDataLine(
     if (filename != data.lastProcessedFilename):
         data.updateProcessingState(filename, None, None, None, None)
     
+    success = False
     for p in processPipeline:
         success = p(data, foldername, filename, lineNumber, lineText)
         if success:
             break
+    
+    if (not success):
+        print(f"Error: Cannot parse line#{lineNumber} in {filename}")
+    
     return
 
