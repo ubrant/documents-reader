@@ -23,6 +23,28 @@ def stripLastPartFromPath(filename: str) -> Type[str]:
     tmp = sub("/[^/]*$", "", filename)
     return sub("\\\\[^\\\\]*$", "", tmp)
 
+def trimLR(string: str) -> Type[str]:
+    return string.lstrip().rstrip()
+
+def trimMultipleSpaces(string: str) -> Type[str]:
+    return sub("\s\s*", " ", string)
+
+def getSecondAndRestOfString(string: str) -> Tuple[str, str]:
+    string = trimLR(string)
+    string = trimMultipleSpaces(string)
+    parts = string.split()
+    numParts = len(parts)
+
+    if (numParts <= 1):
+        return ("", "")
+    if (numParts <= 2):
+        return (trimLR(parts[1]), "")
+    else:
+        rest = ""
+        for p in parts[2:]:
+            rest += " " + p
+        return (trimLR(parts[1]), trimLR(trimMultipleSpaces(rest)))
+
 ######################################################################
 #                     Parsing Elements From Text                     #
 ######################################################################
@@ -36,6 +58,8 @@ def processMajorElement(
                 lineNumber: int, lineText: str) -> bool:
     
     if (lineText.lstrip().lower().startswith("@major")):
+        idString, titleString = getSecondAndRestOfString(lineText)
+        print(f"id = {idString}, title = {titleString}")
         return True
     return False
 
