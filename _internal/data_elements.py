@@ -92,15 +92,8 @@ class Major:
         return self
 
 class Data:
-    def __init__(me) -> None:
-        me.majors = []
-        return
-    
-    def processTextLine(me,
-                foldername: str,
-                filename: str,
-                lineNumber: int, lineText: str) -> None:
-        print(f"{lineNumber}->{lineText}")
+    def __init__(my) -> None:
+        my.majors = []
         return
     
     def sort(me):
@@ -124,3 +117,11 @@ class Data:
         # Replacing and returning
         me.majors = temp
         return me
+
+def insertDataLine(
+                data: Data,
+                foldername: str,
+                filename: str,
+                lineNumber: int, lineText: str) -> None:
+    print(f"{lineNumber}->{lineText}")
+    return
