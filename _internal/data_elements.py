@@ -2,7 +2,7 @@
 # Page Elements
 ####
 class PageElementId:
-    PAGE_ELEMENT_NONE = 0
+    PAGE_ELEMENT_NONE                  = 0
 
     # Section Element
     PAGE_ELEMENT_SECTION_H1            = 1
