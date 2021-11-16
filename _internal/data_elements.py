@@ -1,7 +1,7 @@
 ######
 # Page Elements
 ####
-class PageElementId:
+class PageItemId:
     PAGE_ELEMENT_NONE                  = 0
 
     # Section Element
@@ -38,12 +38,6 @@ class PageElementId:
     # Linking
     PAGE_ELEMENT_LINK_URL              = 71
     PAGE_ELEMENT_LINK_DOCUMENTATION    = 72
-
-class TextElement:
-    def __init__(self) -> None:
-        self.textType = PageElementId.TEXT_ELEMENT_NONE
-        self.text = ""
-        return
 
 class Page:
     def __init__(self) -> None:
