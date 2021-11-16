@@ -5,13 +5,56 @@
 # Section Element
 class PageSection:
     def __init__(self) -> None:
-        self.H1 = ""
-        self.H2 = ""
-        self.Description = ""
-        self.Quote = ""
-        self.QuoteBy = ""
-        self.Background = ""
+        self.h1 = ""
+        self.h2 = ""
+        self.description = ""
+        self.quote = ""
+        self.quoteBy = ""
+        self.background = ""
         return
+
+    def append(self, h1: str = None, h2: str = None,
+                     description: str = None,
+                     quote: str = None, quoteBy: str = None,
+                     background: str = None) -> str:
+        
+        if h1 != None and h1 != "":
+            if self.h1 == "":
+                self.h1 = h1
+            else:
+                return f"Page-section's H1 is already set to {self.h1}"
+        
+        if h2 != None and h2 != "":
+            if self.h2 == "":
+                self.h2 = h2
+            else:
+                return f"Page-section's H2 is already set to {self.h2}"
+        
+        if description != None and description != "":
+            if self.description == "":
+                self.description = description
+            else:
+                return f"Page-section's description is already set to {self.description}"
+        
+        if quote != None and quote != "":
+            if self.quote == "":
+                self.quote = quote
+            else:
+                return f"Page-section's quote is already set to {self.quote}"
+        
+        if quoteBy != None and quoteBy != "":
+            if self.quoteBy == "":
+                self.quoteBy = quoteBy
+            else:
+                return f"Page-section's quote by is already set to {self.quoteBy}"
+        
+        if background != None and background != "":
+            if self.background == "":
+                self.background = background
+            else:
+                return f"Page-section's background is already set to {self.background}"
+        
+        return ""
 
 # Base for Text
 class TextElement:
@@ -85,10 +128,20 @@ class PageImage:
 
 ## Page itself
 class Page:
+    PAGE_LAST_ELEMENT_OTHER                 = 0
+    PAGE_LAST_ELEMENT_SECTION_H1            = 1
+    PAGE_LAST_ELEMENT_SECTION_H2            = 2
+    PAGE_LAST_ELEMENT_SECTION_DESCRIPTION   = 3
+    PAGE_LAST_ELEMENT_SECTION_QUOTE         = 4
+    PAGE_LAST_ELEMENT_SECTION_QUOTE_BY      = 5
+    PAGE_LAST_ELEMENT_SECTION_BACKGROUND    = 6
+
     def __init__(self) -> None:
         self.id = 0
         self.title = ""
+        self.section = None
         self.elements = []
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
         return
 
     def setTitleIfEmpty(self, title: str) -> bool:
@@ -99,51 +152,78 @@ class Page:
 
     # Section
     def addSectionH1(self, text: str) -> str:
-        return ""
+        self.lastElement = Page.PAGE_LAST_ELEMENT_SECTION_H1
+        if self.section == None:
+            self.section = PageSection()
+        return self.section.append(text, None, None, None, None, None)
     def addSectionH2(self, text: str) -> str:
-        return ""
+        self.lastElement = Page.PAGE_LAST_ELEMENT_SECTION_H2
+        if self.section == None:
+            self.section = PageSection()
+        return self.section.append(None, text, None, None, None, None)
     def addSectionDescription(self, text: str) -> str:
-        return ""
+        self.lastElement = Page.PAGE_LAST_ELEMENT_SECTION_DESCRIPTION
+        if self.section == None:
+            self.section = PageSection()
+        return self.section.append(None, None, text, None, None, None)
     def addSectionQuote(self, text: str) -> str:
-        return ""
+        self.lastElement = Page.PAGE_LAST_ELEMENT_SECTION_QUOTE
+        if self.section == None:
+            self.section = PageSection()
+        return self.section.append(None, None, None, text, None, None)
     def addSectionQuoteBy(self, text: str) -> str:
-        return ""
+        self.lastElement = Page.PAGE_LAST_ELEMENT_SECTION_QUOTE_BY
+        if self.section == None:
+            self.section = PageSection()
+        return self.section.append(None, None, None, None, text, None)
     def addSectionBackground(self, filename: str) -> str:
-        return ""
+        self.lastElement = Page.PAGE_LAST_ELEMENT_SECTION_BACKGROUND
+        if self.section == None:
+            self.section = PageSection()
+        return self.section.append(None, None, None, None, None, filename)
 
     # Headings
     def addH1(self, text: str) -> str:
         self.elements.append(PageHeading1(text))
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
         return ""
     def addH2(self, text: str) -> str:
         self.elements.append(PageHeading2(text))
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
         return ""
     def addH3(self, text: str) -> str:
         self.elements.append(PageHeading3(text))
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
         return ""
     def addH4(self, text: str) -> str:
         self.elements.append(PageHeading4(text))
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
         return ""
     def addH5(self, text: str) -> str:
         self.elements.append(PageHeading5(text))
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
         return ""
     def addH6(self, text: str) -> str:
         self.elements.append(PageHeading6(text))
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
         return ""
 
     # Para
     def addPara(self, text: str) -> str:
         self.elements.append(PagePara(text))
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
         return ""
 
     # List
     def addUnorderedList(self, text: str) -> str:
         #self.elements.append(PagePara(text))
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
         return ""
 
     # Image
     def addImage(self, caption: str, filename: str) -> str:
         self.elements.append(PageImage(caption, filename))
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
         return ""
 
     # Text without Tags
