@@ -277,12 +277,18 @@ class Data:
         
         if (updateMajorElementId != None):
             my.currentMajorElementId = updateMajorElementId
+            my.currentMinorElementId = Data.DEFAULT_MINOR_ELEMENT_ID
+            my.currentSectionElementId = Data.DEFAULT_SECTION_ELEMENT_ID
+            my.currentPageElementId = Data.DEFAULT_PAGE_ELEMENT_ID
 
         if (updateMinorElementId != None):
             my.currentMinorElementId = updateMinorElementId
+            my.currentSectionElementId = Data.DEFAULT_SECTION_ELEMENT_ID
+            my.currentPageElementId = Data.DEFAULT_PAGE_ELEMENT_ID
 
         if (updateSectionElementId != None):
             my.currentSectionElementId = updateSectionElementId
+            my.currentPageElementId = Data.DEFAULT_PAGE_ELEMENT_ID
 
         if (updatePageElementId != None):
             my.currentPageElementId = updatePageElementId
