@@ -23,6 +23,7 @@ class Settings:
         self.recursionDepth = 1000000
 
         self.libBootstrapFile = join(workingDir, libsDir, "bootstrap.min.css")
+        self.libSiteStylesFile = join(workingDir, libsDir, "styling.css")
 
         self.outputDir = join(workingDir, outputDir)
         
@@ -74,6 +75,7 @@ class Settings:
         
         opd = self.outputDir.replace(self.scriptDir, "<script-dir>")
         bsf = self.libBootstrapFile.replace(self.scriptDir, "<script-dir>")
+        stf = self.libSiteStylesFile.replace(self.scriptDir, "<script-dir>")
 
         print(headingLine)
         print(f"{indent}Script Directory    -> {self.scriptDir}")
@@ -83,6 +85,7 @@ class Settings:
         print(f"{indent}Recursion Depth     *> {rd}")
         print(f"{indent}Output Path         *> {opd}")
         print(f"{indent}Library (Bootstrap) -> {bsf}")
+        print(f"{indent}        (Styles)    -> {stf}")
 
         while (appendBlankLines > 0):
             print("")
