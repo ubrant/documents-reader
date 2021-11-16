@@ -58,15 +58,6 @@ class PageSection:
 
 # Base for Text
 class TextElement:
-    # Styling
-    TEXT_ELEMENT_BEGIN_BOLD            = 1
-    TEXT_ELEMENT_END_BOLD              = 2
-    TEXT_ELEMENT_BEGIN_ITALIC          = 3
-    TEXT_ELEMENT_END_ITALIC            = 4
-    # Linking
-    TEXT_ELEMENT_LINK_URL              = 5
-    TEXT_ELEMENT_LINK_DOCUMENTATION    = 6
-
     def __init__(self, text: str) -> None:
         self.text = ""
         self.append(text)
@@ -136,6 +127,30 @@ class PageImage:
 
     def append(self, text: str) -> str:
         return "Cannot append text to an image"
+
+# Question
+class PageQuestion:
+    DIFFICULTY_EASY   = 1
+    DIFFICULTY_MEDIUM = 2
+    DIFFICULTY_HARD   = 3
+
+    def __init__(self) -> None:
+        self.difficulty: int = None
+        self.text: str = None
+        self.optA: str = None
+        self.optB: str = None
+        self.optC: str = None
+        self.optD: str = None
+        self.optE: str = None
+        self.optF: str = None
+        self.optG: str = None
+        self.attempts: int = None
+        self.answer: str = None
+        self.explanation: str = None
+        return
+
+    def append(self, text: str) -> str:
+        return "Cannot append text to a question"
 
 ## Page itself
 class Page:
@@ -236,6 +251,96 @@ class Page:
     # Image
     def addImage(self, caption: str, filename: str) -> str:
         self.elements.append(PageImage(caption, filename))
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
+        return ""
+
+    # Question
+    def addQuestion(self) -> str:
+        self.elements.append(PageQuestion())
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
+        return ""
+    def addQuestionDifficulty(self, difficulty: int) -> str:
+        if len(self.elements) > 0 and type(self.elements[-1]) == PageQuestion:
+            self.elements[-1].difficulty = difficulty
+        else:
+            return "Cannot add difficulty level to any question"
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
+        return ""
+    def addQuestionText(self, text: str) -> str:
+        if len(self.elements) > 0 and type(self.elements[-1]) == PageQuestion:
+            self.elements[-1].text = text
+        else:
+            return "Cannot add text to any question"
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
+        return ""
+    def addQuestionOptA(self, text: str) -> str:
+        if len(self.elements) > 0 and type(self.elements[-1]) == PageQuestion:
+            self.elements[-1].optA = text
+        else:
+            return "Cannot add Option A to any question"
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
+        return ""
+    def addQuestionOptB(self, text: str) -> str:
+        if len(self.elements) > 0 and type(self.elements[-1]) == PageQuestion:
+            self.elements[-1].optB = text
+        else:
+            return "Cannot add Option B to any question"
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
+        return ""
+    def addQuestionOptC(self, text: str) -> str:
+        if len(self.elements) > 0 and type(self.elements[-1]) == PageQuestion:
+            self.elements[-1].optC = text
+        else:
+            return "Cannot add Option C to any question"
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
+        return ""
+    def addQuestionOptD(self, text: str) -> str:
+        if len(self.elements) > 0 and type(self.elements[-1]) == PageQuestion:
+            self.elements[-1].optD = text
+        else:
+            return "Cannot add Option D to any question"
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
+        return ""
+    def addQuestionOptE(self, text: str) -> str:
+        if len(self.elements) > 0 and type(self.elements[-1]) == PageQuestion:
+            self.elements[-1].optE = text
+        else:
+            return "Cannot add Option E to any question"
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
+        return ""
+    def addQuestionOptF(self, text: str) -> str:
+        if len(self.elements) > 0 and type(self.elements[-1]) == PageQuestion:
+            self.elements[-1].optF = text
+        else:
+            return "Cannot add Option F to any question"
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
+        return ""
+    def addQuestionOptG(self, text: str) -> str:
+        if len(self.elements) > 0 and type(self.elements[-1]) == PageQuestion:
+            self.elements[-1].optG = text
+        else:
+            return "Cannot add Option G to any question"
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
+        return ""
+    def addQuestionAttempts(self, attempts: int) -> str:
+        if len(self.elements) > 0 and type(self.elements[-1]) == PageQuestion:
+            self.elements[-1].attempts = attempts
+        else:
+            return "Cannot add attempts to any question"
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
+        return ""
+    def addQuestionAnswer(self, answer: str) -> str:
+        if len(self.elements) > 0 and type(self.elements[-1]) == PageQuestion:
+            self.elements[-1].answer = answer
+        else:
+            return "Cannot add answer to any question"
+        self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
+        return ""
+    def addQuestionExplanation(self, explanation: str) -> str:
+        if len(self.elements) > 0 and type(self.elements[-1]) == PageQuestion:
+            self.elements[-1].explanation = explanation
+        else:
+            return "Cannot add explanation to any question"
         self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
         return ""
 

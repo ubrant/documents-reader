@@ -271,6 +271,72 @@ def processPageTextElements(
                 errorMessage = page.addImage(imageCaption, imageFilename)
         isHandled = True
     
+    # Question Tags
+    if (isHandled == False and trimmedLowercaseLine.startswith("@question")):
+        errorMessage = page.addQuestion()
+        isHandled = True
+
+    if (isHandled == False and trimmedLowercaseLine.startswith("#difficulty:")):
+        difficulty = PageQuestion.DIFFICULTY_EASY
+        ds = secondHalfLine.lower()
+        
+        if ds == "medium":
+            difficulty = PageQuestion.DIFFICULTY_MEDIUM
+        elif ds == "hard":
+            difficulty = PageQuestion.DIFFICULTY_HARD
+        
+        errorMessage = page.addQuestionDifficulty(difficulty)
+        isHandled = True
+
+    if (isHandled == False and trimmedLowercaseLine.startswith("#text:")):
+        errorMessage = page.addQuestionText(secondHalfLine)
+        isHandled = True
+
+    if (isHandled == False and trimmedLowercaseLine.startswith("#opta:")):
+        errorMessage = page.addQuestionOptA(secondHalfLine)
+        isHandled = True
+
+    if (isHandled == False and trimmedLowercaseLine.startswith("#optb:")):
+        errorMessage = page.addQuestionOptB(secondHalfLine)
+        isHandled = True
+
+    if (isHandled == False and trimmedLowercaseLine.startswith("#optc:")):
+        errorMessage = page.addQuestionOptC(secondHalfLine)
+        isHandled = True
+
+    if (isHandled == False and trimmedLowercaseLine.startswith("#optd:")):
+        errorMessage = page.addQuestionOptD(secondHalfLine)
+        isHandled = True
+
+    if (isHandled == False and trimmedLowercaseLine.startswith("#opte:")):
+        errorMessage = page.addQuestionOptE(secondHalfLine)
+        isHandled = True
+
+    if (isHandled == False and trimmedLowercaseLine.startswith("#optf:")):
+        errorMessage = page.addQuestionOptF(secondHalfLine)
+        isHandled = True
+
+    if (isHandled == False and trimmedLowercaseLine.startswith("#optg:")):
+        errorMessage = page.addQuestionOptG(secondHalfLine)
+        isHandled = True
+
+    if (isHandled == False and trimmedLowercaseLine.startswith("#attempts:")):
+        na = 0
+        try:
+            na = int(secondHalfLine)
+            errorMessage = page.addQuestionAttempts(secondHalfLine)
+        except:
+            errorMessage = "Invalid number of attempts"
+        isHandled = True
+
+    if (isHandled == False and trimmedLowercaseLine.startswith("#answer:")):
+        errorMessage = page.addQuestionAnswer(secondHalfLine)
+        isHandled = True
+
+    if (isHandled == False and trimmedLowercaseLine.startswith("#explanation:")):
+        errorMessage = page.addQuestionExplanation(secondHalfLine)
+        isHandled = True
+
     ## Have we handled it ...?
     if (isHandled == True):
         if (errorMessage != None and errorMessage != ""):
