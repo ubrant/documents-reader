@@ -66,8 +66,10 @@ print("")
 # Time-stamp - End
 tsEnd = datetime.now()
 
-def printElapsedTime(indent: str, parameter: str, dt: timedelta):
-    messageFormat = "{}{} = {:7.3f} {}"
+def printElapsedTime(indent: str, parameter: str, dt: timedelta, compact = False):
+    messageFormat = "{}{} = {:8.3f} {}"
+    if compact == True:
+        messageFormat = "{}{} = {:.3f} {}"
 
     value = dt.total_seconds()
     unit = "sec"
@@ -87,6 +89,6 @@ printElapsedTime(" > ", "Loading Settings", tsStartProcessingFiles - tsStart)
 printElapsedTime(" > ", "Loading Files   ", tsStartWritingWebContent - tsStartProcessingFiles)
 printElapsedTime(" > ", "Writing Files   ", tsEnd - tsStartWritingWebContent)
 print("")
-printElapsedTime(" > ", "Total", tsEnd - tsStart)
+printElapsedTime(" > ", "Total", tsEnd - tsStart, compact = True)
 
 print("")
