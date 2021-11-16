@@ -208,7 +208,16 @@ def processPageTextElements(
         isHandled = True
 
     if (isHandled == False and trimmedLowercaseLine.startswith("$bg:")):
-        errorMessage = page.addSectionBackground(secondHalfLine)
+        imageFilename = trimLR(secondHalfLine)
+        if not isfile(imageFilename):
+            tempFilename = join(foldername, imageFilename)
+            if isfile(tempFilename):
+                errorMessage = page.addSectionBackground(tempFilename)
+            else:
+                errorMessage = f"Cannot find image file {imageFilename}"
+        else:
+            errorMessage = page.addSectionBackground(imageFilename)
+        
         isHandled = True
 
     # Heading Tags

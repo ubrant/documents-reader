@@ -62,7 +62,7 @@ class Page:
         return ""
     def addSectionQuoteBy(self, text: str) -> str:
         return ""
-    def addSectionBackground(self, text: str) -> str:
+    def addSectionBackground(self, filename: str) -> str:
         return ""
 
     # Headings
