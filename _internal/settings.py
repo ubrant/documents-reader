@@ -16,18 +16,18 @@ class Settings:
         libsDir = "libs-web"
         outputDir = "Generated-Site"
 
-        self.scriptName = ""
-        self.scriptDir = workingDir
-        self.scanDir = workingDir
-        self.isRecursive = True
-        self.recursionDepth = 1000000
+        self.scriptName: str = ""
+        self.scriptDir: str = workingDir
+        self.scanDir: str = workingDir
+        self.isRecursive: bool = True
+        self.recursionDepth: int = 1000000
 
-        self.libCssBootstrapFile  = join(workingDir, libsDir, "bootstrap.min.css")
-        self.libCssSiteStylesFile = join(workingDir, libsDir, "site-styles.css")
-        self.libJsJQueryFile      = join(workingDir, libsDir, "jquery.min.js")
-        self.libJsSiteScriptFile  = join(workingDir, libsDir, "site-script.js")
+        self.libCssBootstrapFile: str  = join(workingDir, libsDir, "bootstrap.min.css")
+        self.libCssSiteStylesFile: str = join(workingDir, libsDir, "site-styles.css")
+        self.libJsJQueryFile: str      = join(workingDir, libsDir, "jquery.min.js")
+        self.libJsSiteScriptFile: str  = join(workingDir, libsDir, "site-script.js")
 
-        self.outputDir = join(workingDir, outputDir)
+        self.outputDir: str = join(workingDir, outputDir)
         
         self.parseArguments()
 
