@@ -1,7 +1,9 @@
+from genericpath import isfile
 from _internal.data_elements   import *
 
+from os.path                   import isfile, join
 from typing                    import Tuple, Type
-from re                        import sub
+from re                        import sub, search
 
 ######
 # File Reading
@@ -58,6 +60,18 @@ def getSecondRestOfString(string: str) -> Type[str]:
         for p in parts[1:]:
             rest += " " + p
         return trimLR(rest)
+
+def getImageCaptionAndFilename(string: str) -> Tuple[str, str]:
+    #Format=>
+    # Image: [caption ...](module-graph.png)
+    s = search(".*\[(.*)\]\s*\((.*)\).*$", string)
+
+    if s == None:
+        return ("", "")
+
+    caption = trimLR(trimMultipleSpaces(s.group(1)))
+    imagename = trimLR(trimMultipleSpaces(s.group(2)))
+    return (caption, imagename)
 
 ######################################################################
 #                     Parsing Elements From Text                     #
@@ -234,7 +248,18 @@ def processPageTextElements(
 
     # Image Tag
     if (isHandled == False and trimmedLowercaseLine.startswith("#image:")):
-        errorMessage = page.addImage("", "")
+        imageCaption, imageFilename = getImageCaptionAndFilename(lineText)
+        if (imageCaption == "" and imageFilename == ""):
+            errorMessage = "Invalid Image Tag"
+        else:
+            if not isfile(imageFilename):
+                tempFilename = join(foldername, imageFilename)
+                if isfile(tempFilename):
+                    errorMessage = page.addImage(imageCaption, tempFilename)
+                else:
+                    errorMessage = f"Cannot find image file {imageFilename}"
+            else:
+                errorMessage = page.addImage(imageCaption, imageFilename)
         isHandled = True
     
     ## Have we handled it ...?
