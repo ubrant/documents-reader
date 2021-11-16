@@ -7,7 +7,7 @@ from re                        import sub
 # File Reading
 ####
 def readFileWithLineNumbers(filename: str) -> Tuple[int, str]:
-    f = open(filename, "rU", 8102, "utf-8-sig")
+    f = open(filename, "rU", 8192, "utf-8-sig")
     ln = 0
     for line in f:
         ln += 1
