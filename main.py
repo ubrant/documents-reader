@@ -14,6 +14,9 @@ from _internal.web         import  WebContentGenerator
 tsStart = datetime.now()
 
 # Global Settings
+print("Loading Settings")
+print("----------------")
+
 settings = Settings()
 settings.print(
     headingLine = "Settings:",
@@ -37,6 +40,7 @@ for file in getDesiredFiles(settings, ".ubd"):
     print(f"Reading {file}")
     parser.loadFile(file)
 
+print("")
 
 ######
 # Writing Files
@@ -46,10 +50,14 @@ for file in getDesiredFiles(settings, ".ubd"):
 tsStartWritingWebContent = datetime.now()
 
 # Generating Web Content
+print("Generating Web Content")
+print("----------------------")
+
 webGenerator = WebContentGenerator(settings, parser.getParsedData())
 webGenerator.generateOutput()
 webGenerator.openOutput()
 
+print("")
 
 ######
 # End
@@ -71,16 +79,14 @@ def printElapsedTime(indent: str, parameter: str, dt: timedelta):
     print(messageFormat.format(indent, parameter, value, unit))
 
 print("")
-print(".")
-print("...")
 print("Completed")
+print("---------")
 
-print("")
 print("Times taken:")
-printElapsedTime("  > ", "Loading Settings", tsStartProcessingFiles - tsStart)
-printElapsedTime("  > ", "Loading Files   ", tsStartWritingWebContent - tsStartProcessingFiles)
-printElapsedTime("  > ", "Writing Files   ", tsEnd - tsStartWritingWebContent)
+printElapsedTime(" > ", "Loading Settings", tsStartProcessingFiles - tsStart)
+printElapsedTime(" > ", "Loading Files   ", tsStartWritingWebContent - tsStartProcessingFiles)
+printElapsedTime(" > ", "Writing Files   ", tsEnd - tsStartWritingWebContent)
 print("")
-printElapsedTime("  > ", "Total", tsEnd - tsStart)
+printElapsedTime(" > ", "Total", tsEnd - tsStart)
 
 print("")
