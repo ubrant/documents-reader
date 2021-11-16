@@ -73,7 +73,10 @@ class TextElement:
         return
 
     def append(self, text: str) -> str:
-        self.text = self.text + " " + text
+        if self.text == "":
+            self.text = text
+        else:
+            self.text = self.text + " " + text
         return ""
 
 # Headings
