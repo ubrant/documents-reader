@@ -92,8 +92,8 @@ class Page:
         return ""
 
     # Text without Tags
-    def appendText(self, text: str) -> bool:
-        return True
+    def appendText(self, text: str) -> str:
+        return ""
 
 ######
 # Section Element

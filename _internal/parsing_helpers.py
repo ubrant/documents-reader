@@ -234,7 +234,7 @@ def processPageTextElements(
 
     # Image Tag
     if (isHandled == False and trimmedLowercaseLine.startswith("#image:")):
-        errorMessage = page.addUnorderedList(secondHalfLine)
+        errorMessage = page.addImage("", "")
         isHandled = True
     
     ## Have we handled it ...?
@@ -243,8 +243,14 @@ def processPageTextElements(
             print(internalErrorPattern.format(errorMessage, filename, lineNumber))
         
         return True
+    else:
+        errorMessage = page.appendText(lineText)
+        if (errorMessage != None and errorMessage != ""):
+            print(internalErrorPattern.format(errorMessage, filename, lineNumber))
+        else:
+            return True
     
-    return page.appendText(lineText)
+    return False
 
 ######
 # Parsing Pipeline
