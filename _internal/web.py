@@ -1,4 +1,3 @@
-from genericpath import isdir
 from _internal.settings       import Settings
 from _internal.data_elements  import *
 
@@ -28,7 +27,7 @@ class WebContentGenerator:
         self.printHierarchy()
         self.written = False
         if ensureDir(self.settings.outputDir):
-            pass
+            return ""
         return
 
     def printHierarchy(self) -> None:
