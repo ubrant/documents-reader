@@ -1,48 +1,89 @@
 ######
 # Page Elements
 ####
-class PageItemId:
-    PAGE_ELEMENT_NONE                  = 0
 
-    # Section Element
-    PAGE_ELEMENT_SECTION_H1            = 1
-    PAGE_ELEMENT_SECTION_H2            = 2
-    PAGE_ELEMENT_SECTION_DESCRIPTION   = 3
-    PAGE_ELEMENT_SECTION_QUOTE         = 4
-    PAGE_ELEMENT_SECTION_QUOTE_BY      = 5
-    PAGE_ELEMENT_SECTION_BACKGROUND    = 6
-    
-    # Headings
-    PAGE_ELEMENT_H1                    = 11
-    PAGE_ELEMENT_H2                    = 12
-    PAGE_ELEMENT_H3                    = 13
-    PAGE_ELEMENT_H4                    = 14
-    PAGE_ELEMENT_H5                    = 15
-    PAGE_ELEMENT_H6                    = 16
-    
-    # Para
-    PAGE_ELEMENT_PARA                  = 21
-    
-    # Unordered List
-    PAGE_ELEMENT_UNORDERED_LIST        = 31
-    
-    # Image
-    PAGE_ELEMENT_IMAGE                 = 41
-    
+# Section Element
+class PageSection:
+    def __init__(self) -> None:
+        self.H1 = ""
+        self.H2 = ""
+        self.Description = ""
+        self.Quote = ""
+        self.QuoteBy = ""
+        self.Background = ""
+        return
+
+# Base for Text
+class TextElement:
     # Styling
-    PAGE_ELEMENT_BEGIN_BOLD            = 61
-    PAGE_ELEMENT_END_BOLD              = 62
-    PAGE_ELEMENT_BEGIN_ITALIC          = 63
-    PAGE_ELEMENT_END_ITALIC            = 64
-    
+    PAGE_ELEMENT_BEGIN_BOLD            = 1
+    PAGE_ELEMENT_END_BOLD              = 2
+    PAGE_ELEMENT_BEGIN_ITALIC          = 3
+    PAGE_ELEMENT_END_ITALIC            = 4
     # Linking
-    PAGE_ELEMENT_LINK_URL              = 71
-    PAGE_ELEMENT_LINK_DOCUMENTATION    = 72
+    PAGE_ELEMENT_LINK_URL              = 5
+    PAGE_ELEMENT_LINK_DOCUMENTATION    = 6
 
+    def __init__(self, text: str) -> None:
+        self.text = text
+        return
+
+# Headings
+class PageHeading1(TextElement):
+    def __init__(self, text: str) -> None:
+        super().__init__(text)
+        return
+
+class PageHeading2(TextElement):
+    def __init__(self, text: str) -> None:
+        super().__init__(text)
+        return
+
+class PageHeading3(TextElement):
+    def __init__(self, text: str) -> None:
+        super().__init__(text)
+        return
+
+class PageHeading4(TextElement):
+    def __init__(self, text: str) -> None:
+        super().__init__(text)
+        return
+
+class PageHeading5(TextElement):
+    def __init__(self, text: str) -> None:
+        super().__init__(text)
+        return
+
+class PageHeading6(TextElement):
+    def __init__(self, text: str) -> None:
+        super().__init__(text)
+        return
+
+# Para
+class PagePara(TextElement):
+    def __init__(self, text: str) -> None:
+        super().__init__(text)
+        return
+
+# List
+class PageUnorderedList:
+    def __init__(self) -> None:
+        self.textElements = []
+        return
+
+# Image
+class PageImage:
+    def __init__(self, caption: str, filename: str) -> None:
+        self.caption = caption
+        self.filename = filename
+        return
+
+## Page itself
 class Page:
     def __init__(self) -> None:
         self.id = 0
         self.title = ""
+        self.elements = []
         return
 
     def setTitleIfEmpty(self, title: str) -> bool:
@@ -67,28 +108,37 @@ class Page:
 
     # Headings
     def addH1(self, text: str) -> str:
+        self.elements.append(PageHeading1(text))
         return ""
     def addH2(self, text: str) -> str:
+        self.elements.append(PageHeading2(text))
         return ""
     def addH3(self, text: str) -> str:
+        self.elements.append(PageHeading3(text))
         return ""
     def addH4(self, text: str) -> str:
+        self.elements.append(PageHeading4(text))
         return ""
     def addH5(self, text: str) -> str:
+        self.elements.append(PageHeading5(text))
         return ""
     def addH6(self, text: str) -> str:
+        self.elements.append(PageHeading6(text))
         return ""
 
     # Para
     def addPara(self, text: str) -> str:
+        self.elements.append(PagePara(text))
         return ""
 
     # List
     def addUnorderedList(self, text: str) -> str:
+        #self.elements.append(PagePara(text))
         return ""
 
     # Image
     def addImage(self, caption: str, filename: str) -> str:
+        self.elements.append(PageImage(caption, filename))
         return ""
 
     # Text without Tags
