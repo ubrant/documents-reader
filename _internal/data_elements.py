@@ -16,16 +16,21 @@ class PageSection:
 # Base for Text
 class TextElement:
     # Styling
-    PAGE_ELEMENT_BEGIN_BOLD            = 1
-    PAGE_ELEMENT_END_BOLD              = 2
-    PAGE_ELEMENT_BEGIN_ITALIC          = 3
-    PAGE_ELEMENT_END_ITALIC            = 4
+    TEXT_ELEMENT_BEGIN_BOLD            = 1
+    TEXT_ELEMENT_END_BOLD              = 2
+    TEXT_ELEMENT_BEGIN_ITALIC          = 3
+    TEXT_ELEMENT_END_ITALIC            = 4
     # Linking
-    PAGE_ELEMENT_LINK_URL              = 5
-    PAGE_ELEMENT_LINK_DOCUMENTATION    = 6
+    TEXT_ELEMENT_LINK_URL              = 5
+    TEXT_ELEMENT_LINK_DOCUMENTATION    = 6
 
     def __init__(self, text: str) -> None:
-        self.text = text
+        self.text = ""
+        self.append(text)
+        return
+
+    def append(self, text: str) -> None:
+        self.text = self.text + " " + text
         return
 
 # Headings
