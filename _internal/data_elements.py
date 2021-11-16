@@ -51,7 +51,48 @@ class Page:
             return True
         return False
 
-    def appendText(self, lineText: str) -> bool:
+    # Section
+    def addSectionH1(self, text: str) -> str:
+        return ""
+    def addSectionH2(self, text: str) -> str:
+        return ""
+    def addSectionDescription(self, text: str) -> str:
+        return ""
+    def addSectionQuote(self, text: str) -> str:
+        return ""
+    def addSectionQuoteBy(self, text: str) -> str:
+        return ""
+    def addSectionBackground(self, text: str) -> str:
+        return ""
+
+    # Headings
+    def addH1(self, text: str) -> str:
+        return ""
+    def addH2(self, text: str) -> str:
+        return ""
+    def addH3(self, text: str) -> str:
+        return ""
+    def addH4(self, text: str) -> str:
+        return ""
+    def addH5(self, text: str) -> str:
+        return ""
+    def addH6(self, text: str) -> str:
+        return ""
+
+    # Para
+    def addPara(self, text: str) -> str:
+        return ""
+
+    # List
+    def addUnorderedList(self, text: str) -> str:
+        return ""
+
+    # Image
+    def addImage(self, caption: str, filename: str) -> str:
+        return ""
+
+    # Text without Tags
+    def appendText(self, text: str) -> bool:
         return True
 
 ######

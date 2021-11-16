@@ -167,54 +167,81 @@ def processPageTextElements(
     secondHalfLine = getSecondRestOfString(lineText)
     page = data.getActivePage()
 
+    internalErrorPattern = "    Error:{} in {} at line#{}"
+    errorMessage = ""
+
+    isHandled = False
+
     # Section Tags
-    if (trimmedLowercaseLine.startswith("$h1:")):
-        return True
+    if (isHandled == False and trimmedLowercaseLine.startswith("$h1:")):
+        errorMessage = page.addSectionH1(secondHalfLine)
+        isHandled = True
 
-    if (trimmedLowercaseLine.startswith("$h2:")):
-        return True
+    if (isHandled == False and trimmedLowercaseLine.startswith("$h2:")):
+        errorMessage = page.addSectionH2(secondHalfLine)
+        isHandled = True
 
-    if (trimmedLowercaseLine.startswith("$dt:")):
-        return True
+    if (isHandled == False and trimmedLowercaseLine.startswith("$dt:")):
+        errorMessage = page.addSectionDescription(secondHalfLine)
+        isHandled = True
 
-    if (trimmedLowercaseLine.startswith("$qt:")):
-        return True
+    if (isHandled == False and trimmedLowercaseLine.startswith("$qt:")):
+        errorMessage = page.addSectionQuote(secondHalfLine)
+        isHandled = True
 
-    if (trimmedLowercaseLine.startswith("$qb:")):
-        return True
+    if (isHandled == False and trimmedLowercaseLine.startswith("$qb:")):
+        errorMessage = page.addSectionQuoteBy(secondHalfLine)
+        isHandled = True
 
-    if (trimmedLowercaseLine.startswith("$bg:")):
-        return True
+    if (isHandled == False and trimmedLowercaseLine.startswith("$bg:")):
+        errorMessage = page.addSectionBackground(secondHalfLine)
+        isHandled = True
 
     # Heading Tags
-    if (trimmedLowercaseLine.startswith("#h1:")):
-        return True
+    if (isHandled == False and trimmedLowercaseLine.startswith("#h1:")):
+        errorMessage = page.addH1(secondHalfLine)
+        isHandled = True
 
-    if (trimmedLowercaseLine.startswith("#h2:")):
-        return True
+    if (isHandled == False and trimmedLowercaseLine.startswith("#h2:")):
+        errorMessage = page.addH2(secondHalfLine)
+        isHandled = True
 
-    if (trimmedLowercaseLine.startswith("#h3:")):
-        return True
+    if (isHandled == False and trimmedLowercaseLine.startswith("#h3:")):
+        errorMessage = page.addH3(secondHalfLine)
+        isHandled = True
 
-    if (trimmedLowercaseLine.startswith("#h4:")):
-        return True
+    if (isHandled == False and trimmedLowercaseLine.startswith("#h4:")):
+        errorMessage = page.addH4(secondHalfLine)
+        isHandled = True
 
-    if (trimmedLowercaseLine.startswith("#h5:")):
-        return True
+    if (isHandled == False and trimmedLowercaseLine.startswith("#h5:")):
+        errorMessage = page.addH5(secondHalfLine)
+        isHandled = True
 
-    if (trimmedLowercaseLine.startswith("#h6:")):
-        return True
+    if (isHandled == False and trimmedLowercaseLine.startswith("#h6:")):
+        errorMessage = page.addH6(secondHalfLine)
+        isHandled = True
 
     # Paragraph Tag
-    if (trimmedLowercaseLine.startswith("#para:")):
-        return True
+    if (isHandled == False and trimmedLowercaseLine.startswith("#para:")):
+        errorMessage = page.addPara(secondHalfLine)
+        isHandled = True
 
     # List Tag
-    if (trimmedLowercaseLine.startswith("#list:")):
-        return True
+    if (isHandled == False and trimmedLowercaseLine.startswith("#list:")):
+        errorMessage = page.addUnorderedList(secondHalfLine)
+        isHandled = True
 
     # Image Tag
-    if (trimmedLowercaseLine.startswith("#image:")):
+    if (isHandled == False and trimmedLowercaseLine.startswith("#image:")):
+        errorMessage = page.addUnorderedList(secondHalfLine)
+        isHandled = True
+    
+    ## Have we handled it ...?
+    if (isHandled == True):
+        if (errorMessage != None and errorMessage != ""):
+            print(internalErrorPattern.format(errorMessage, filename, lineNumber))
+        
         return True
     
     return page.appendText(lineText)
