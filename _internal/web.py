@@ -9,15 +9,19 @@ class WebContentGenerator:
         return
 
     def generateOutput(self) -> None:
-        for major in self.data.majors:
-            print(f"Major({major.id}): {major.title}")
-            for minor in major.minors:
-                print(f"    Minor({minor.id}): {minor.title}")
-                for section in minor.sections:
-                    print(f"        Section({section.id}): {section.title}")
-                    for page in section.pages:
-                        print(f"            Page({page.id}): {page.title}")
+        self.printHierarchy()
         return
+
+    def printHierarchy(self) -> None:
+        print("Hierarchy:")
+        for major in self.data.majors:
+            print(f" > Major({major.id}): {major.title}")
+            for minor in major.minors:
+                print(f"     > Minor({minor.id}): {minor.title}")
+                for section in minor.sections:
+                    print(f"         > Section({section.id}): {section.title}")
+                    for page in section.pages:
+                        print(f"             > Page({page.id}): {page.title}")
 
     def openOutput(self) -> None:
         return
