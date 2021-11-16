@@ -72,9 +72,9 @@ class TextElement:
         self.append(text)
         return
 
-    def append(self, text: str) -> None:
+    def append(self, text: str) -> str:
         self.text = self.text + " " + text
-        return
+        return ""
 
 # Headings
 class PageHeading1(TextElement):
@@ -119,12 +119,20 @@ class PageUnorderedList:
         self.textElements = []
         return
 
+    def append(self, text: str) -> str:
+        if text != "":
+            self.textElements.append(TextElement(text))
+        return ""
+
 # Image
 class PageImage:
     def __init__(self, caption: str, filename: str) -> None:
         self.caption = caption
         self.filename = filename
         return
+
+    def append(self, text: str) -> str:
+        return "Cannot append text to an image"
 
 ## Page itself
 class Page:
@@ -216,7 +224,9 @@ class Page:
 
     # List
     def addUnorderedList(self, text: str) -> str:
-        #self.elements.append(PagePara(text))
+        tlist = PageUnorderedList()
+        tlist.append(text)
+        self.elements.append(tlist)
         self.lastElement = Page.PAGE_LAST_ELEMENT_OTHER
         return ""
 
@@ -228,7 +238,22 @@ class Page:
 
     # Text without Tags
     def appendText(self, text: str) -> str:
-        return ""
+        if self.lastElement == Page.PAGE_LAST_ELEMENT_SECTION_H1:
+            return self.section.append(text, None, None, None, None, None)
+        elif self.lastElement == Page.PAGE_LAST_ELEMENT_SECTION_H2:
+            return self.section.append(None, text, None, None, None, None)
+        elif self.lastElement == Page.PAGE_LAST_ELEMENT_SECTION_DESCRIPTION:
+            return self.section.append(None, None, text, None, None, None)
+        elif self.lastElement == Page.PAGE_LAST_ELEMENT_SECTION_QUOTE:
+            return self.section.append(None, None, None, text, None, None)
+        elif self.lastElement == Page.PAGE_LAST_ELEMENT_SECTION_QUOTE_BY:
+            return self.section.append(None, None, None, None, text, None)
+        elif self.lastElement == Page.PAGE_LAST_ELEMENT_SECTION_BACKGROUND:
+            return self.section.append(None, None, None, None, None, text)
+        else:
+            if len(self.elements) > 0:
+                return self.elements[-1].append(text)
+            return "Cannot append text to any element"
 
 ######
 # Section Element
