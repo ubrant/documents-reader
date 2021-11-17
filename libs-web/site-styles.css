@@ -1,0 +1,169 @@
+body {
+    scroll-behavior: smooth;
+  }
+  
+  /* stylelint-disable-next-line selector-max-universal */
+  .ub-heading + div > * + * {
+    margin-top: 3rem;
+  }
+  
+  /* Table of contents */
+  .ub-aside a {
+    padding: .1875rem .5rem;
+    margin-top: .125rem;
+    margin-left: .3125rem;
+    color: rgba(0, 0, 0, .65);
+    text-decoration: none;
+  }
+  
+  .ub-aside a:hover,
+  .ub-aside a:focus {
+    color: rgba(0, 0, 0, .85);
+    background-color: rgba(121, 82, 179, .1);
+  }
+  
+  .ub-aside .active {
+    font-weight: 600;
+    color: rgba(0, 0, 0, .85);
+  }
+  
+  .ub-aside .btn {
+    padding: .25rem .5rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, .65);
+    border: 0;
+  }
+  
+  .ub-aside .btn:hover,
+  .ub-aside .btn:focus {
+    color: rgba(0, 0, 0, .85);
+    background-color: rgba(121, 82, 179, .1);
+  }
+  
+  .ub-aside .btn:focus {
+    box-shadow: 0 0 0 1px rgba(173, 136, 230, 0.7);
+  }
+  
+  .ub-aside .btn::before {
+    width: 1.25em;
+    line-height: 0;
+    content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+    transition: transform .35s ease;
+  
+    /* rtl:raw:
+    transform: rotate(180deg) translateX(-2px);
+    */
+    transform-origin: .5em 50%;
+  }
+  
+  .ub-aside .btn[aria-expanded="true"]::before {
+    transform: rotate(90deg)/* rtl:ignore */;
+  }
+  
+  
+  /* Site */
+  .scrollspy-docs {
+    position: relative;
+    height: 200px;
+    margin-top: .5rem;
+    overflow: auto;
+  }
+  
+  [id="modal"] .ub-docs .btn,
+  [id="buttons"] .ub-docs .btn,
+  [id="tooltips"] .ub-docs .btn,
+  [id="popovers"] .ub-docs .btn,
+  [id="dropdowns"] .ub-docs .btn-group,
+  [id="dropdowns"] .ub-docs .dropdown,
+  [id="dropdowns"] .ub-docs .dropup,
+  [id="dropdowns"] .ub-docs .dropend,
+  [id="dropdowns"] .ub-docs .dropstart {
+    margin: 0 1rem 1rem 0;
+  }
+  
+  /* Layout */
+  @media (min-width: 1200px) {
+    body {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr 4fr 1fr;
+      grid-template-rows: auto;
+    }
+  
+    .ub-header {
+      position: fixed;
+      top: 0;
+      /* rtl:begin:ignore */
+      right: 0;
+      left: 0;
+      /* rtl:end:ignore */
+      z-index: 1030;
+      grid-column: 1 / span 3;
+    }
+  
+    .ub-aside,
+    .ub-data {
+      padding-top: 4rem;
+    }
+  
+    /**
+     * Presently, only Firefox supports subgrids
+     */
+    .ub-data,
+    .ub-data section,
+    .ub-data article {
+      display: inherit; /* 1 */
+      gap: inherit; /* 1 */
+      grid-template-columns: 1fr 4fr;
+      grid-column: 1 / span 2;
+      grid-template-rows: auto;
+    }
+  
+    .ub-aside {
+      grid-area: 1 / 3;
+      scroll-margin-top: 4rem;
+    }
+  
+    .ub-data section,
+    .ub-data section > h2 {
+      top: 2rem;
+      scroll-margin-top: 2rem;
+    }
+  
+    .ub-data section > h2::before {
+      position: absolute;
+      /* rtl:begin:ignore */
+      top: 0;
+      right: 0;
+      bottom: -2rem;
+      left: 0;
+      /* rtl:end:ignore */
+      z-index: -1;
+      content: "";
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1) calc(100% - 3rem), rgba(255, 255, 255, .01));
+    }
+  
+    .ub-data article,
+    .ub-data .ub-heading {
+      top: 8rem;
+      scroll-margin-top: 8rem;
+    }
+  
+    .ub-data .ub-heading {
+      z-index: 1;
+    }
+  }
+
+  .ub-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+  
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+  }
