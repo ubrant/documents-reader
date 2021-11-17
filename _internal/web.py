@@ -29,6 +29,14 @@ def loadFileText(indent: str, filename: str):
 def convertFilePathToURL(filename: str) -> str:
     return 'file://' + filename.replace("\\", "/")
 
+def getOutputFilename(outputDir: str,
+                      major: Major,
+                      minor: Minor,
+                      section: Section,
+                      page: Page) -> str:
+    
+    return join(outputDir,
+            f"P{major.id}.{minor.id}.{section.id}.{page.id}.html")
 ######
 # Web Content Generator
 ####
@@ -102,9 +110,8 @@ class WebContentGenerator:
                             section: Section,
                             page: Page):
         
-        self.lastWrittenFilename = join(
-            self.settings.outputDir,
-            f"P{major.id}.{minor.id}.{section.id}.{page.id}.html")
+        self.lastWrittenFilename = getOutputFilename(self.settings.outputDir,
+                                                     major, minor, section, page)
 
         f = open(self.lastWrittenFilename, "w")
         f.write(self.convertPageToHtml(major, minor, section, page))
@@ -123,7 +130,7 @@ class WebContentGenerator:
         PageTitle = f"{page.title}"
         CSSBootstrapFileURL = convertFilePathToURL(self.settings.libCssBootstrapFile)
         CSSSiteStylesFileURL = convertFilePathToURL(self.settings.libCssSiteStylesFile)
-        MajorListItems = self.getHtmlOfPageMajorItemsList(page)
+        MajorListItems = self.getHtmlOfPageMajorItemsList()
         Content = self.getHtmlOfPageContent(page)
         JSjQueryFileURL = convertFilePathToURL(self.settings.libJsJQueryFile)
         JSBootstrapFileURL = convertFilePathToURL(self.settings.libJsBootstrapFile)
@@ -143,8 +150,40 @@ class WebContentGenerator:
                     .replace("@JSBootstrapFileURL",   f"{JSBootstrapFileURL}")     \
                     .replace("@JSSiteScriptFileURL",  f"{JSSiteScriptFileURL}")
 
-    def getHtmlOfPageMajorItemsList(self, page: Page) -> str:
-        return ""
+    def getHtmlOfPageMajorItemsList(self) -> str:
+        MajorListItems: str = ""
+        for major in self.data.majors:
+            MinorListItems = ""
+            for minor in major.minors:
+
+                SectionListItems = ""
+                for section in minor.sections:
+                    
+                    PageListItems = ""
+                    for page in section.pages:
+                        PageListItems += \
+                            self.templateSidePageItem   \
+                                .replace("@PageName", page.title)  \
+                                .replace("@PageURL",    \
+                                    getOutputFilename(
+                                        self.settings.outputDir,
+                                        major, minor, section, page))
+                    SectionListItems += \
+                        self.templateSideSectionItem   \
+                            .replace("@SectionName", section.title)  \
+                            .replace("@PageListItems", PageListItems)
+                
+                MinorListItems += \
+                    self.templateSideMinorItem   \
+                        .replace("@MinorName", minor.title)  \
+                        .replace("@SectionListItems", SectionListItems)
+            
+            MajorListItems += \
+                self.templateSideMajorItem   \
+                    .replace("@MajorName", major.title)   \
+                    .replace("@MinorListItems", MinorListItems)
+        
+        return MajorListItems
 
     def getHtmlOfPageContent(self, page: Page) -> str:
         return ""
