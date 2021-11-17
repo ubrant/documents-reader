@@ -1,4 +1,5 @@
 from datetime              import  datetime, timedelta
+from os.path               import  isfile
 
 from _internal.settings    import  Settings
 from _internal.recursion   import  getDesiredFiles
@@ -23,6 +24,29 @@ settings.print(
     indent = " > ",
     appendBlankLines = 1)
 
+# Checking availability of templates
+def checkTemplateFileAvailability(filename: str) -> None:
+    if not isfile(filename):
+        print(f"Error: Template File Missing ({filename})")
+        print("Cannot continue to process ...")
+        exit(1)
+    return
+
+checkTemplateFileAvailability(settings.templateContentHeading1File)
+checkTemplateFileAvailability(settings.templateContentHeading2File)
+checkTemplateFileAvailability(settings.templateContentHeading3File)
+checkTemplateFileAvailability(settings.templateContentHeading4File)
+checkTemplateFileAvailability(settings.templateContentHeading5File)
+checkTemplateFileAvailability(settings.templateContentHeading6File)
+checkTemplateFileAvailability(settings.templateContentImageFile)
+checkTemplateFileAvailability(settings.templateContentListUnorderedFile)
+checkTemplateFileAvailability(settings.templateContentParaFile)
+checkTemplateFileAvailability(settings.templateContentQuestionFile)
+checkTemplateFileAvailability(settings.templateContentSectionFile)
+checkTemplateFileAvailability(settings.templateContentFile)
+checkTemplateFileAvailability(settings.templateSideItemFile)
+checkTemplateFileAvailability(settings.templateSideFile)
+checkTemplateFileAvailability(settings.templateSiteFile)
 
 ######
 # Loading Files
