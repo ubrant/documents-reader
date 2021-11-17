@@ -1,7 +1,7 @@
 from _internal.settings       import Settings
 from _internal.data_elements  import *
 
-from os                       import mkdir, execl, system
+from os                       import mkdir, execl, replace, system
 from os.path                  import isdir, exists, join
 
 ######
@@ -25,6 +25,9 @@ def loadFileText(indent: str, filename: str):
     text = f.read()
     f.close()
     return text
+
+def convertFilePathToURL(filename: str) -> str:
+    return 'file://' + filename.replace("\\", "/")
 
 ######
 # Web Content Generator
@@ -103,9 +106,50 @@ class WebContentGenerator:
             self.settings.outputDir,
             f"P{major.id}.{minor.id}.{section.id}.{page.id}.html")
 
-        #f = open(self.lastWrittenFilename, "w")
+        f = open(self.lastWrittenFilename, "w")
+        f.write(self.convertPageToHtml(major, minor, section, page))
         return
 
+    ### Expansion to HTML
+    def convertPageToHtml(self, major: Major,
+                               minor: Minor,
+                               section: Section,
+                               page: Page) -> str:
+        
+        MajorID = f"{major.id}"
+        MinorID = f"{minor.id}"
+        SectionID = f"{section.id}"
+        PageID = f"{page.id}"
+        PageTitle = f"{page.title}"
+        CSSBootstrapFileURL = convertFilePathToURL(self.settings.libCssBootstrapFile)
+        CSSSiteStylesFileURL = convertFilePathToURL(self.settings.libCssSiteStylesFile)
+        MajorListItems = self.getHtmlOfPageMajorItemsList(page)
+        Content = self.getHtmlOfPageContent(page)
+        JSjQueryFileURL = convertFilePathToURL(self.settings.libJsJQueryFile)
+        JSBootstrapFileURL = convertFilePathToURL(self.settings.libJsBootstrapFile)
+        JSSiteScriptFileURL = convertFilePathToURL(self.settings.libJsSiteScriptFile)
+        
+        return self.templateSite    \
+                    .replace("@MajorID",              f"{MajorID}")                \
+                    .replace("@MinorID",              f"{MinorID}")                \
+                    .replace("@SectionID",            f"{SectionID}")              \
+                    .replace("@PageID",               f"{PageID}")                 \
+                    .replace("@PageTitle",            f"{PageTitle}")              \
+                    .replace("@CSSBootstrapFileURL",  f"{CSSBootstrapFileURL}")    \
+                    .replace("@CSSSiteStylesFileURL", f"{CSSSiteStylesFileURL}")   \
+                    .replace("@MajorListItems",       f"{MajorListItems}")         \
+                    .replace("@Content",              f"{Content}")                \
+                    .replace("@JSjQueryFileURL",      f"{JSjQueryFileURL}")        \
+                    .replace("@JSBootstrapFileURL",   f"{JSBootstrapFileURL}")     \
+                    .replace("@JSSiteScriptFileURL",  f"{JSSiteScriptFileURL}")
+
+    def getHtmlOfPageMajorItemsList(self, page: Page) -> str:
+        return ""
+
+    def getHtmlOfPageContent(self, page: Page) -> str:
+        return ""
+
+    ### Hierarchy
     def printHierarchy(self) -> None:
         print("Hierarchy:")
         for major in self.data.majors:
