@@ -68,6 +68,10 @@ class Settings:
         
 
     def print(self, headingLine, indent, appendBlankLines = 0):
+        indent2 = indent
+        for i in range (len(indent)):
+            indent2 = " " + indent2
+        
         re = "Disabled"
         if(self.isRecursive):
             re = "Enabled"
@@ -90,11 +94,12 @@ class Settings:
         print(f"{indent}Recursion              *> {re}")
         print(f"{indent}Recursion Depth        *> {rd}")
         print(f"{indent}Output Path            *> {outputDir}")
-        print(f"{indent}Library (Bootstrap)    -> {libCssBootstrapFile}")
-        print(f"{indent}        (Site CSS)     -> {libCssSiteStylesFile}")
-        print(f"{indent}        (jQuery)       -> {libJsJQueryFile}")
-        print(f"{indent}        (Bootstrap JS) -> {libJsBootstrapFile}")
-        print(f"{indent}        (Site JS)      -> {libJsSiteScriptFile}")
+        print(f"{indent}Library:")
+        print(f"{indent2}(Bootstrap)    -> {libCssBootstrapFile}")
+        print(f"{indent2}(jQuery)       -> {libJsJQueryFile}")
+        print(f"{indent2}(Bootstrap JS) -> {libJsBootstrapFile}")
+        print(f"{indent2}(Site CSS)     -> {libCssSiteStylesFile}")
+        print(f"{indent2}(Site JS)      -> {libJsSiteScriptFile}")
 
         while (appendBlankLines > 0):
             print("")
