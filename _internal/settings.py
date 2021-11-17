@@ -72,15 +72,16 @@ class Settings:
         for i in range (len(indent)):
             indent2 = " " + indent2
         
-        re = "Disabled"
+        recursion = "Disabled"
         if(self.isRecursive):
-            re = "Enabled"
+            recursion = "Enabled"
         
-        rd = self.recursionDepth
-        if(rd == 1000000):
-            rd = "Infinite"
+        recursionDepth = self.recursionDepth
+        if(recursionDepth == 1000000):
+            recursionDepth = "Infinite"
         
         outputDir = self.outputDir.replace(self.scriptDir, "<script-dir>")
+        
         libCssBootstrapFile = self.libCssBootstrapFile.replace(self.scriptDir, "<script-dir>")
         libCssSiteStylesFile = self.libCssSiteStylesFile.replace(self.scriptDir, "<script-dir>")
         libJsJQueryFile = self.libJsJQueryFile.replace(self.scriptDir, "<script-dir>")
@@ -91,8 +92,8 @@ class Settings:
         print(f"{indent}Script Directory       -> {self.scriptDir}")
         print(f"{indent}Script Name            -> {self.scriptName}")
         print(f"{indent}Scan Directory         *> {self.scanDir}")
-        print(f"{indent}Recursion              *> {re}")
-        print(f"{indent}Recursion Depth        *> {rd}")
+        print(f"{indent}Recursion              *> {recursion}")
+        print(f"{indent}Recursion Depth        *> {recursionDepth}")
         print(f"{indent}Output Path            *> {outputDir}")
         print(f"{indent}Library:")
         print(f"{indent2}(Bootstrap)    -> {libCssBootstrapFile}")
