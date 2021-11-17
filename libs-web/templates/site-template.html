@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta major-id="@MajorID" minor-id="@MinorID" section-id="@SectionID" page-id="@PageID" />
+    <title>@PageTitle</title>
+    <link rel="stylesheet" href="@CSSBootstrapFileLocalURL" />
+    <link rel="stylesheet" href="@CSSSiteStylesFileLocalURL" />
+</head>
+<body class="bg-light">
+    <header class="bd-header bg-dark py-3 d-flex align-items-stretch border-bottom border-dark">
+        <div class="container-fluid d-flex align-items-center">
+            <h1 class="d-flex align-items-center fs-4 text-white mb-0">
+                Ubrant - Reference
+            </h1>
+        </div>
+    </header>
+
+    <aside class="ub-aside sticky-xl-left text-muted align-self-start mb-3 mb-xl-5 px-2">
+        <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">Documents</h2>
+        <nav class="small" id="toc">
+            <ul class="list-unstyled">
+                @MajorListItems
+            </ul>
+        </nav>
+    </aside>
+    <div class="ub-data container-fluid bg-body">
+        <section>
+            @Content
+        </section>
+    </div>
+    <script src="@JSjQueryFileLocalURL"></script>
+    <script src="@JSBootstrapFileLocalURL"></script>
+    <script src="@JSSiteScriptFileLocalURL"></script>
+</body>
+</html>
