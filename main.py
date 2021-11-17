@@ -45,8 +45,10 @@ checkTemplateFileAvailability(settings.templateContentParaFile)
 checkTemplateFileAvailability(settings.templateContentQuestionFile)
 checkTemplateFileAvailability(settings.templateContentSectionFile)
 checkTemplateFileAvailability(settings.templateContentFile)
-checkTemplateFileAvailability(settings.templateSideItemFile)
-checkTemplateFileAvailability(settings.templateSideFile)
+checkTemplateFileAvailability(settings.templateSideMajorItemFile)
+checkTemplateFileAvailability(settings.templateSideMinorItemFile)
+checkTemplateFileAvailability(settings.templateSideSectionItemFile)
+checkTemplateFileAvailability(settings.templateSidePageItemFile)
 checkTemplateFileAvailability(settings.templateSiteFile)
 
 ######

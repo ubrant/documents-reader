@@ -44,8 +44,10 @@ class Settings:
         self.templateContentQuestionFile: str      = join(workingDir, templatesDir, "content-question-template.html")
         self.templateContentSectionFile: str       = join(workingDir, templatesDir, "content-section-template.html")
         self.templateContentFile: str              = join(workingDir, templatesDir, "content-template.html")
-        self.templateSideItemFile: str             = join(workingDir, templatesDir, "side-item-template.html")
-        self.templateSideFile: str                 = join(workingDir, templatesDir, "side-template.html")
+        self.templateSideMajorItemFile: str        = join(workingDir, templatesDir, "side-major-item-template.html")
+        self.templateSideMinorItemFile: str        = join(workingDir, templatesDir, "side-minor-item-template.html")
+        self.templateSideSectionItemFile: str      = join(workingDir, templatesDir, "side-section-item-template.html")
+        self.templateSidePageItemFile: str         = join(workingDir, templatesDir, "side-page-item-template.html")
         self.templateSiteFile: str                 = join(workingDir, templatesDir, "site-template.html")
         
         self.parseArguments()
@@ -120,8 +122,10 @@ class Settings:
         templateContentQuestionFile       = self.templateContentQuestionFile.replace(self.scriptDir, scriptDirInd)
         templateContentSectionFile        = self.templateContentSectionFile.replace(self.scriptDir, scriptDirInd)
         templateContentFile               = self.templateContentFile.replace(self.scriptDir, scriptDirInd)
-        templateSideItemFile              = self.templateSideItemFile.replace(self.scriptDir, scriptDirInd)
-        templateSideFile                  = self.templateSideFile.replace(self.scriptDir, scriptDirInd)
+        templateSideMajorItemFile         = self.templateSideMajorItemFile.replace(self.scriptDir, scriptDirInd)
+        templateSideMinorItemFile         = self.templateSideMinorItemFile.replace(self.scriptDir, scriptDirInd)
+        templateSideSectionItemFile       = self.templateSideSectionItemFile.replace(self.scriptDir, scriptDirInd)
+        templateSidePageItemFile          = self.templateSidePageItemFile.replace(self.scriptDir, scriptDirInd)
         templateSiteFile                  = self.templateSiteFile.replace(self.scriptDir, scriptDirInd)
         
         print(headingLine)
@@ -153,8 +157,10 @@ class Settings:
         print(f"{indent2}(Content - Question)         -> {templateContentQuestionFile}")
         print(f"{indent2}(Content - Section)          -> {templateContentSectionFile}")
         print(f"{indent2}(Content)                    -> {templateContentFile}")
-        print(f"{indent2}(Side Item)                  -> {templateSideItemFile}")
-        print(f"{indent2}(Side)                       -> {templateSideFile}")
+        print(f"{indent2}(Side - Major Item)          -> {templateSideMajorItemFile}")
+        print(f"{indent2}(Side - Minor Item)          -> {templateSideMinorItemFile}")
+        print(f"{indent2}(Side - Section Item)        -> {templateSideSectionItemFile}")
+        print(f"{indent2}(Side - Page Item)           -> {templateSidePageItemFile}")
         print(f"{indent2}(Site)                       -> {templateSiteFile}")
 
         while (appendBlankLines > 0):
