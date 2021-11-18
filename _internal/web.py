@@ -3,7 +3,7 @@ from _internal.data_elements  import *
 
 from os                       import mkdir
 from os.path                  import isdir, exists, join
-from re                       import findall, sub
+from re                       import findall, sub, search
 
 import webbrowser
 
@@ -95,6 +95,20 @@ class WebContentGenerator:
         self.templateSite: str = loadFileText(indent, self.settings.templateSiteFile)
 
         return
+
+    def getSelfAddressURL(self, majorId: int, minorId: int, sectionId: int, pageId: int) -> str:
+        return ""
+        major = None
+        minor = None
+        section = None
+        page = None
+        for major in self.data.majors:
+            for minor in major.minors:
+                for section in minor.sections:
+                    for page in section.pages:
+                        pass
+        return convertFilePathToURL(
+            getOutputFilename(self.settings.outputDir, major, minor, section, page))
 
     def generateOutput(self) -> None:
         self.printHierarchy()
@@ -317,8 +331,63 @@ class WebContentGenerator:
         # :Link-URL:[TEXT][HINT](URL)
         # :Link-Site:[TEXT][HINT](Major-ID, Minor-ID, Section-ID, Page-ID)
         #   <a href="----" hint="----">----</a>
-        text = sub('\:Link-URL\:\[(.*?)\]\[(.*?)\]\((.*?)\)', '<a href="\\3" class="link" data-toggle="popover" data-placement="top" title="\\2">\\1</a>', text)
-        text = sub('\:Link-URL\:\[(.*?)\]\((.*?)\)',          '<a href="\\2" class="link" data-toggle="popover" data-placement="top" title="\\1">\\1</a>', text)
+        text = sub('\:Link-URL\:\[(.*?)\]\[(.*?)\]\((.*?)\)', '<a href="\\3" class="link" title="\\2">\\1</a>', text)
+        text = sub('\:Link-URL\:\[(.*?)\]\((.*?)\)',          '<a href="\\2" class="link" title="\\1">\\1</a>', text)
+        while True:
+            s1 = search("\:\s*Link-Site\s*\:\s*\[(.*?)\]\s*\[(.*?)\]\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)", text)
+            s2 = search("\:\s*Link-Site\s*\:\s*\[(.*?)\]\s*\[(.*?)\]\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)", text)
+            s3 = search("\:\s*Link-Site\s*\:\s*\[(.*?)\]\s*\[(.*?)\]\s*\(\s*(\d+)\s*,\s*(\d+)\s*\)", text)
+            s4 = search("\:\s*Link-Site\s*\:\s*\[(.*?)\]\s*\[(.*?)\]\s*\(\s*(\d+)\s*\)", text)
+            s5 = search("\:\s*Link-Site\s*\:\s*\[(.*?)\]\s*\[(.*?)\]\s*\(\s*\)", text)
+            
+            if s1 == None and s2 == None and s3 == None and s4 == None and s5 == None:
+                break
+
+            m = ""
+            sText = ""
+            sHint = ""
+
+            if s1 != None:
+               m     = s1.group(0)
+               sText = s1.group(1)
+               sHint = s1.group(2)
+            if s2 != None:
+               m     = s2.group(0)
+               sText = s2.group(1)
+               sHint = s2.group(2)
+            if s3 != None:
+               m     = s3.group(0)
+               sText = s3.group(1)
+               sHint = s3.group(2)
+            if s4 != None:
+               m     = s4.group(0)
+               sText = s4.group(1)
+               sHint = s4.group(2)
+            if s5 != None:
+               m     = s5.group(0)
+               sText = s5.group(1)
+               sHint = s5.group(2)
+
+            sMajor = None
+            sMinor = None
+            sSection = None
+            sPage = None
+
+            if s1 != None: sMajor = int(s1.group(3))
+            if s2 != None: sMajor = int(s2.group(3))
+            if s3 != None: sMajor = int(s3.group(3))
+            if s4 != None: sMajor = int(s4.group(3))
+
+            if s1 != None: sMinor = int(s1.group(4))
+            if s2 != None: sMinor = int(s2.group(4))
+            if s3 != None: sMinor = int(s3.group(4))
+
+            if s1 != None: sSection = int(s1.group(5))
+            if s2 != None: sSection = int(s2.group(5))
+
+            if s1 != None: sPage = s1.group(6)
+            
+            text = text.replace(m, f"<a href=\"{self.getSelfAddressURL(sMajor, sMinor, sSection, sPage)}\" class=\"link\" title=\"{sHint}\">{sText}</a>")
         
         # {text}
         #  <span class="boldfaced">----</span>
