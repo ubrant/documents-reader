@@ -263,6 +263,49 @@ class WebContentGenerator:
             return self.templateContentImage \
                         .replace("@ImageURL", convertFilePathToURL(element.filename))   \
                         .replace("@ImageCaption", element.caption)
+        
+        # Question
+        if type(element) == PageQuestion:
+            difficulty = element.difficulty
+            text = element.text
+            attempts = element.attempts
+            answer = element.answer
+            explanation = element.explanation
+            optA = element.optA
+            optB = element.optB
+            optC = element.optC
+            optD = element.optD
+            optE = element.optE
+            optF = element.optF
+            optG = element.optG
+
+            if difficulty == None: difficulty = PageQuestion.DIFFICULTY_EASY
+            if text == None: text = ""
+            if attempts == None: attempts = 1
+            if answer == None: answer = ""
+            if explanation == None: explanation = ""
+            if optA == None: optA = ""
+            if optB == None: optB = ""
+            if optC == None: optC = ""
+            if optD == None: optD = ""
+            if optE == None: optE = ""
+            if optF == None: optF = ""
+            if optG == None: optG = ""
+
+            return self.templateContentQuestion \
+                        .replace("@Difficulty", f"{difficulty}") \
+                        .replace("@Text", text)                  \
+                        .replace("@Attempts", f"{attempts}")     \
+                        .replace("@Answer", answer)              \
+                        .replace("@Explanation", explanation)    \
+                        .replace("@OptA", optA)   \
+                        .replace("@OptB", optB)   \
+                        .replace("@OptC", optC)   \
+                        .replace("@OptD", optD)   \
+                        .replace("@OptE", optE)   \
+                        .replace("@OptF", optF)   \
+                        .replace("@OptG", optG)
+        
         return ""
 
     ### Hierarchy

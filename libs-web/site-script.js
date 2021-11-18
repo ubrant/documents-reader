@@ -59,4 +59,10 @@
     }
 
     setActiveItem()
+
+    // Hide blank Question options
+    $(".card .form-check label").each(function(i){
+        var text = $(this).text().trim()
+        if (!text) $(this).parent().hide();
+    })
 })()

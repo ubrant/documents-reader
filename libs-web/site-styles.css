@@ -89,6 +89,10 @@ body {
   margin-bottom: 2.2em;
 }
 
+.card .form-check {
+  margin-left: 4.0em;
+}
+
 .card-img-top {
   max-height: 15em;
   max-width: min-content;
