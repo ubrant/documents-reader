@@ -59,6 +59,14 @@ body {
   .ub-aside .btn[aria-expanded="true"]::before {
     transform: rotate(90deg)/* rtl:ignore */;
   }
+
+  .ub-aside a.focus {
+    text-decoration: underline rgb(21, 12, 29);
+    font-style: italic;
+    font-weight: 700;
+    font-size: small;
+    color: rgb(19, 8, 8);
+  }
   
 .list-majors {
   margin-left: 0.5em;

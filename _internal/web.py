@@ -165,6 +165,10 @@ class WebContentGenerator:
                     for page in section.pages:
                         PageListItems += \
                             self.templateSidePageItem   \
+                                .replace("@MajorID", f"{major.id}")   \
+                                .replace("@MinorID", f"{minor.id}")       \
+                                .replace("@SectionID", f"{section.id}")  \
+                                .replace("@PageID", f"{page.id}")  \
                                 .replace("@PageName", page.title)  \
                                 .replace("@PageURL",    \
                                     getOutputFilename(
@@ -178,7 +182,7 @@ class WebContentGenerator:
                 
                 MinorListItems += \
                     self.templateSideMinorItem   \
-                        .replace("@MinorID", f"{minor.id}")       \
+                        .replace("@MinorID", f"{minor.id}")  \
                         .replace("@MinorName", minor.title)  \
                         .replace("@SectionListItems", SectionListItems)
             

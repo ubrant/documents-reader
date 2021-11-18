@@ -32,40 +32,31 @@
         })
 
     function setActiveItem() {
-        var hash = window.location.hash
+        var ids = $('meta[name="ubrant-ids"]')
+        var majorId = ids.attr("major-id")
+        var minorId = ids.attr("minor-id")
+        var sectionId = ids.attr("section-id")
+        var pageId = ids.attr("page-id")
 
-        if (hash === '') {
-            return
-        }
+        console.log("ID = ", majorId, minorId, sectionId, pageId);
 
-        var link = document.querySelector('.ub-aside a[href="' + hash + '"]')
+        var major = $("#Major" + majorId)
+        var minor = $("#Minor" + minorId)
+        var section = $("#Section" + sectionId)
+        //Page-@MajorID-@MinorID-@SectionID-@PageID
+        var page = $("#Page-" + majorId + "-" + minorId + "-" + sectionId + "-" + pageId)
 
-        if (!link) {
-            return
-        }
+        if (!major) return
+        if (!minor) return
+        if (!section) return
+        if (!page) return
 
-        var active = document.querySelector('.ub-aside .active')
-        var parent = link.parentNode.parentNode.previousElementSibling
+        major.prev().click()
+        minor.prev().click()
+        section.prev().click()
 
-        link.classList.add('active')
-
-        if (parent.classList.contains('collapsed')) {
-            parent.click()
-        }
-
-        if (!active) {
-            return
-        }
-
-        var expanded = active.parentNode.parentNode.previousElementSibling
-
-        active.classList.remove('active')
-
-        if (expanded && parent !== expanded) {
-            expanded.click()
-        }
+        page.addClass('focus')
     }
 
     setActiveItem()
-    window.addEventListener('hashchange', setActiveItem)
 })()
