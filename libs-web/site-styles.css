@@ -81,6 +81,10 @@ body {
   margin-left: 0.9em;
 }
 
+.list-group {
+  margin-bottom: 1.0em;
+}
+
 .card-img-top {
   max-height: 15em;
   max-width: min-content;

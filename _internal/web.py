@@ -247,6 +247,16 @@ class WebContentGenerator:
         if type(element) == PagePara:
             return self.templateContentPara \
                         .replace("@ParaText", element.text)
+        
+        # List
+        if type(element) == PageUnorderedList:
+            ListItems = ""
+            for li in element.textElements:
+                ListItems += self.templateContentListUnorderedItem \
+                    .replace("@ItemText", li.text)
+            
+            return self.templateContentListUnordered \
+                        .replace("@ListItems", ListItems)
         return ""
 
     ### Hierarchy
