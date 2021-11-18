@@ -67,7 +67,14 @@ body {
     font-size: small;
     color: rgb(19, 8, 8);
   }
-  
+
+.boldfaced {
+  font-weight: 700;
+}
+.italicized {
+  font-style: italic;
+}
+
 .list-majors {
   margin-left: 0.5em;
 }
