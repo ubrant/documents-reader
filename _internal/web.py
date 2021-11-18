@@ -191,7 +191,26 @@ class WebContentGenerator:
         return MajorListItems
 
     def getHtmlOfPageContent(self, page: Page) -> str:
-        return ""
+        retHtml = self.getHtmlOfPageSection(page.section)
+        return retHtml
+
+    def getHtmlOfPageSection(self, section: PageSection) -> str:
+        if section == None: return ""
+
+        H1Text = f"{section.h1}"
+        H2Text = f"{section.h2}"
+        ImageFile = convertFilePathToURL(section.background)
+        DescriptionText = f"{section.description}"
+        QuoteText = f"{section.quote}"
+        QuoteByText = f"{section.quoteBy}"
+
+        return self.templateContentSection \
+                    .replace("@H1Text", H1Text)   \
+                    .replace("@H2Text", H2Text)   \
+                    .replace("@ImageFile", ImageFile)   \
+                    .replace("@DescriptionText", DescriptionText)   \
+                    .replace("@QuoteText", QuoteText)   \
+                    .replace("@QuoteByText", QuoteByText)
 
     ### Hierarchy
     def printHierarchy(self) -> None:

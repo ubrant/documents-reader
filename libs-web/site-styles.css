@@ -73,6 +73,12 @@ body {
   margin-left: 0.9em;
 }
 
+.card-img-top {
+  max-height: 15em;
+  max-width: min-content;
+  align-self: center;
+}
+
   /* Site */
   .scrollspy-docs {
     position: relative;
