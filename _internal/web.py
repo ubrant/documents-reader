@@ -1,8 +1,10 @@
 from _internal.settings       import Settings
 from _internal.data_elements  import *
 
-from os                       import mkdir, execl, replace, system
+from os                       import mkdir
 from os.path                  import isdir, exists, join
+
+import webbrowser
 
 ######
 # Helpers
@@ -202,5 +204,5 @@ class WebContentGenerator:
 
     def openOutput(self) -> None:
         if (self.lastWrittenFilename != None and self.lastWrittenFilename != ""):
-            pass
+            webbrowser.open_new_tab(f"{self.lastWrittenFilename}")
         return
