@@ -64,10 +64,13 @@ class TextElement:
         return
 
     def append(self, text: str) -> str:
+        if text == None or text == "": return ""
+
         if self.text == "":
             self.text = text
         else:
             self.text = self.text + " " + text
+        
         return ""
 
 # Headings
