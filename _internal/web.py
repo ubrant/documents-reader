@@ -317,7 +317,7 @@ class WebContentGenerator:
         # :Link-URL:[TEXT][HINT](URL)
         # :Link-Site:[TEXT][HINT](Major-ID, Minor-ID, Section-ID, Page-ID)
         #   <a href="----" hint="----">----</a>
-        text = sub('\:Link-URL\:\[(.*?)\]\[(.*?)\]\((.*?)\)', '<a href="\\3" class="link" hint="\\2">\\1</a>', text)
+        text = sub('\:Link-URL\:\[(.*?)\]\[(.*?)\]\((.*?)\)', '<a href="\\3" class="link" data-toggle="popover" data-placement="top" title="\\2">\\1</a>', text)
         
         # {text}
         #  <span class="boldfaced">----</span>
