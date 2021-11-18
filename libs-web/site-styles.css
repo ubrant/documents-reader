@@ -60,7 +60,19 @@ body {
     transform: rotate(90deg)/* rtl:ignore */;
   }
   
-  
+.list-majors {
+  margin-left: 0.5em;
+}
+.list-minors {
+  margin-left: 0.9em;
+}
+.list-sections {
+  margin-left: 0.9em;
+}
+.list-pages {
+  margin-left: 0.9em;
+}
+
   /* Site */
   .scrollspy-docs {
     position: relative;
