@@ -85,6 +85,10 @@ body {
   margin-bottom: 1.0em;
 }
 
+.figure {
+  margin-bottom: 2.2em;
+}
+
 .card-img-top {
   max-height: 15em;
   max-width: min-content;

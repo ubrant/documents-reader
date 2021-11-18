@@ -257,6 +257,12 @@ class WebContentGenerator:
             
             return self.templateContentListUnordered \
                         .replace("@ListItems", ListItems)
+        
+        # Image
+        if type(element) == PageImage:
+            return self.templateContentImage \
+                        .replace("@ImageURL", convertFilePathToURL(element.filename))   \
+                        .replace("@ImageCaption", element.caption)
         return ""
 
     ### Hierarchy
