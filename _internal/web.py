@@ -200,6 +200,8 @@ class WebContentGenerator:
 
     def getHtmlOfPageContent(self, page: Page) -> str:
         retHtml = self.getHtmlOfPageSection(page.section)
+        for element in page.elements:
+            retHtml += self.getHtmlOfPageElement(element)
         return retHtml
 
     def getHtmlOfPageSection(self, section: PageSection) -> str:
@@ -219,6 +221,33 @@ class WebContentGenerator:
                     .replace("@DescriptionText", DescriptionText)   \
                     .replace("@QuoteText", QuoteText)   \
                     .replace("@QuoteByText", QuoteByText)
+
+    def getHtmlOfPageElement(self, element) -> str:
+        # Headings
+        if type(element) == PageHeading1:
+            return self.templateContentHeading1 \
+                        .replace("@HeadingText", element.text)
+        if type(element) == PageHeading2:
+            return self.templateContentHeading2 \
+                        .replace("@HeadingText", element.text)
+        if type(element) == PageHeading3:
+            return self.templateContentHeading3 \
+                        .replace("@HeadingText", element.text)
+        if type(element) == PageHeading4:
+            return self.templateContentHeading4 \
+                        .replace("@HeadingText", element.text)
+        if type(element) == PageHeading5:
+            return self.templateContentHeading5 \
+                        .replace("@HeadingText", element.text)
+        if type(element) == PageHeading6:
+            return self.templateContentHeading6 \
+                        .replace("@HeadingText", element.text)
+        
+        # Para
+        if type(element) == PagePara:
+            return self.templateContentPara \
+                        .replace("@ParaText", element.text)
+        return ""
 
     ### Hierarchy
     def printHierarchy(self) -> None:
