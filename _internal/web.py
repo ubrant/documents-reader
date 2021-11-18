@@ -313,9 +313,18 @@ class WebContentGenerator:
 
     def processSpecialTags(self, text: str) -> str:
         if text == None: return ""
-        # <a class="d-flex align-items-center" href="@LinkURL">@LinkText</a>
-        # 
-        text = sub('a', 'aaaa', text)
+        
+        # {text}
+        #  <span class="boldfaced">----</span>
+        text = sub('\{(.*)\}', '<span class="boldfaced">\\1</span>', text)
+
+        # /text/
+        #  <span class="italicized">----</span>
+
+        # :Link-URL:[TEXT][HINT](URL)
+        # :Link-Site:[TEXT][HINT](Major-ID, Minor-ID, Section-ID, Page-ID)
+        #   <a href="----">----</a>
+        
         return text
 
     ### Hierarchy
