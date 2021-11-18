@@ -46,6 +46,7 @@ class WebContentGenerator:
     def __init__(self, settings: Settings, data: Data) -> None:
         self.settings: Settings = settings
         self.data: Data = data
+        self.firstWrittenFilename: str = None
         self.lastWrittenFilename: str = None
 
         self.templateContentHeading1: str = None
@@ -115,6 +116,9 @@ class WebContentGenerator:
         self.lastWrittenFilename = getOutputFilename(self.settings.outputDir,
                                                      major, minor, section, page)
 
+        if (self.firstWrittenFilename == None or self.firstWrittenFilename == ""):
+            self.firstWrittenFilename = self.lastWrittenFilename
+        
         f = open(self.lastWrittenFilename, "w")
         f.write(self.convertPageToHtml(major, minor, section, page))
         return
@@ -230,5 +234,5 @@ class WebContentGenerator:
 
     def openOutput(self) -> None:
         if (self.lastWrittenFilename != None and self.lastWrittenFilename != ""):
-            webbrowser.open_new_tab(f"{self.lastWrittenFilename}")
+            webbrowser.open_new_tab(f"{self.firstWrittenFilename}")
         return
