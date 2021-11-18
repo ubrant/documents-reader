@@ -314,16 +314,19 @@ class WebContentGenerator:
     def processSpecialTags(self, text: str) -> str:
         if text == None: return ""
         
+        # :Link-URL:[TEXT][HINT](URL)
+        # :Link-Site:[TEXT][HINT](Major-ID, Minor-ID, Section-ID, Page-ID)
+        #   <a href="----" hint="----">----</a>
+        text = sub('\:Link-URL\:\[(.*)\]\[(.*)\]\((.*)\)', '<a href="\\3" hint="\\2">\\1</a>', text)
+        
         # {text}
         #  <span class="boldfaced">----</span>
         text = sub('\{(.*)\}', '<span class="boldfaced">\\1</span>', text)
 
         # /text/
         #  <span class="italicized">----</span>
-
-        # :Link-URL:[TEXT][HINT](URL)
-        # :Link-Site:[TEXT][HINT](Major-ID, Minor-ID, Section-ID, Page-ID)
-        #   <a href="----">----</a>
+        text = sub('(?!href=")/(.*)/(\s)*', '\\1<span class="italicized">\\2</span>\\3', text)
+        #text = sub('(?!href=")/(.*)/"\?', '<span class="italicized">\\1</span>', text)
         
         return text
 
