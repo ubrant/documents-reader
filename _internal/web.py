@@ -97,16 +97,42 @@ class WebContentGenerator:
         return
 
     def getSelfAddressURL(self, majorId: int, minorId: int, sectionId: int, pageId: int) -> str:
-        return ""
         major = None
         minor = None
         section = None
         page = None
-        for major in self.data.majors:
-            for minor in major.minors:
-                for section in minor.sections:
-                    for page in section.pages:
-                        pass
+
+        for mj in self.data.majors:
+            if major == None: major = mj
+            if mj.id == majorId:
+                major = mj
+                break
+        
+        if major == None: return ""
+        
+        for mi in major.minors:
+            if minor == None: minor = mi
+            if mi.id == minorId:
+                minor = mi
+                break
+
+        if minor == None: return ""
+        
+        for se in minor.sections:
+            if section == None: section = se
+            if se.id == sectionId:
+                section = se
+                break
+
+        if section == None: return ""
+
+        for pg in section.pages:
+            if page == None: page = pg
+            if pg.id == pageId:
+                page = pg
+                break
+        
+        if page == None: return ""
         return convertFilePathToURL(
             getOutputFilename(self.settings.outputDir, major, minor, section, page))
 
