@@ -3,6 +3,7 @@ from _internal.data_elements  import *
 
 from os                       import mkdir
 from os.path                  import isdir, exists, join
+from re                       import findall, sub
 
 import webbrowser
 
@@ -82,7 +83,6 @@ class WebContentGenerator:
         self.templateContentHeading5: str = loadFileText(indent, self.settings.templateContentHeading5File)
         self.templateContentHeading6: str = loadFileText(indent, self.settings.templateContentHeading6File)
         self.templateContentImage: str = loadFileText(indent, self.settings.templateContentImageFile)
-        self.templateContentLink: str = loadFileText(indent, self.settings.templateContentLinkFile)
         self.templateContentListUnordered: str = loadFileText(indent, self.settings.templateContentListUnorderedFile)
         self.templateContentListUnorderedItem: str = loadFileText(indent, self.settings.templateContentListUnorderedItemFile)
         self.templateContentPara: str = loadFileText(indent, self.settings.templateContentParaFile)
@@ -108,6 +108,8 @@ class WebContentGenerator:
                             self.writeHtmlPage(major, minor, section, page)
         return
 
+    ###
+    # HTML
     def writeHtmlPage(self, major: Major,
                             minor: Minor,
                             section: Section,
@@ -123,7 +125,7 @@ class WebContentGenerator:
         f.write(self.convertPageToHtml(major, minor, section, page))
         return
 
-    ### Expansion to HTML
+    ### Page to HTML
     def convertPageToHtml(self, major: Major,
                                minor: Minor,
                                section: Section,
@@ -134,6 +136,7 @@ class WebContentGenerator:
         SectionID = f"{section.id}"
         PageID = f"{page.id}"
         PageTitle = f"{page.title}"
+
         CSSBootstrapFileURL = convertFilePathToURL(self.settings.libCssBootstrapFile)
         CSSSiteStylesFileURL = convertFilePathToURL(self.settings.libCssSiteStylesFile)
         MajorListItems = self.getHtmlOfPageMajorItemsList()
@@ -207,12 +210,12 @@ class WebContentGenerator:
     def getHtmlOfPageSection(self, section: PageSection) -> str:
         if section == None: return ""
 
-        H1Text = f"{section.h1}"
-        H2Text = f"{section.h2}"
+        H1Text = self.processSpecialTags(f"{section.h1}")
+        H2Text = self.processSpecialTags(f"{section.h2}")
         ImageFile = convertFilePathToURL(section.background)
-        DescriptionText = f"{section.description}"
-        QuoteText = f"{section.quote}"
-        QuoteByText = f"{section.quoteBy}"
+        DescriptionText = self.processSpecialTags(f"{section.description}")
+        QuoteText = self.processSpecialTags(f"{section.quote}")
+        QuoteByText = self.processSpecialTags(f"{section.quoteBy}")
 
         return self.templateContentSection \
                     .replace("@H1Text", H1Text)   \
@@ -226,58 +229,58 @@ class WebContentGenerator:
         # Headings
         if type(element) == PageHeading1:
             return self.templateContentHeading1 \
-                        .replace("@HeadingText", element.text)
+                        .replace("@HeadingText", self.processSpecialTags(element.text))
         if type(element) == PageHeading2:
             return self.templateContentHeading2 \
-                        .replace("@HeadingText", element.text)
+                        .replace("@HeadingText", self.processSpecialTags(element.text))
         if type(element) == PageHeading3:
             return self.templateContentHeading3 \
-                        .replace("@HeadingText", element.text)
+                        .replace("@HeadingText", self.processSpecialTags(element.text))
         if type(element) == PageHeading4:
             return self.templateContentHeading4 \
-                        .replace("@HeadingText", element.text)
+                        .replace("@HeadingText", self.processSpecialTags(element.text))
         if type(element) == PageHeading5:
             return self.templateContentHeading5 \
-                        .replace("@HeadingText", element.text)
+                        .replace("@HeadingText", self.processSpecialTags(element.text))
         if type(element) == PageHeading6:
             return self.templateContentHeading6 \
-                        .replace("@HeadingText", element.text)
+                        .replace("@HeadingText", self.processSpecialTags(element.text))
         
         # Para
         if type(element) == PagePara:
             return self.templateContentPara \
-                        .replace("@ParaText", element.text)
+                        .replace("@ParaText", self.processSpecialTags(element.text))
         
         # List
         if type(element) == PageUnorderedList:
             ListItems = ""
             for li in element.textElements:
                 ListItems += self.templateContentListUnorderedItem \
-                    .replace("@ItemText", li.text)
+                    .replace("@ItemText", self.processSpecialTags(li.text))
             
             return self.templateContentListUnordered \
-                        .replace("@ListItems", ListItems)
+                                .replace("@ListItems", ListItems)
         
         # Image
         if type(element) == PageImage:
             return self.templateContentImage \
                         .replace("@ImageURL", convertFilePathToURL(element.filename))   \
-                        .replace("@ImageCaption", element.caption)
+                        .replace("@ImageCaption", self.processSpecialTags(element.caption))
         
         # Question
         if type(element) == PageQuestion:
-            difficulty = element.difficulty
-            text = element.text
-            attempts = element.attempts
-            answer = element.answer
-            explanation = element.explanation
-            optA = element.optA
-            optB = element.optB
-            optC = element.optC
-            optD = element.optD
-            optE = element.optE
-            optF = element.optF
-            optG = element.optG
+            difficulty  = element.difficulty
+            text        = self.processSpecialTags(element.text)
+            attempts    = element.attempts
+            answer      = self.processSpecialTags(element.answer)
+            explanation = self.processSpecialTags(element.explanation)
+            optA        = self.processSpecialTags(element.optA)
+            optB        = self.processSpecialTags(element.optB)
+            optC        = self.processSpecialTags(element.optC)
+            optD        = self.processSpecialTags(element.optD)
+            optE        = self.processSpecialTags(element.optE)
+            optF        = self.processSpecialTags(element.optF)
+            optG        = self.processSpecialTags(element.optG)
 
             if difficulty == None: difficulty = PageQuestion.DIFFICULTY_EASY
             if text == None: text = ""
@@ -307,6 +310,13 @@ class WebContentGenerator:
                         .replace("@OptG", optG)
         
         return ""
+
+    def processSpecialTags(self, text: str) -> str:
+        if text == None: return ""
+        # <a class="d-flex align-items-center" href="@LinkURL">@LinkText</a>
+        # 
+        text = sub('a', 'aaaa', text)
+        return text
 
     ### Hierarchy
     def printHierarchy(self) -> None:
