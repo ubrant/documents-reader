@@ -172,16 +172,19 @@ class WebContentGenerator:
                                         major, minor, section, page))
                     SectionListItems += \
                         self.templateSideSectionItem   \
+                            .replace("@SectionID", f"{section.id}")  \
                             .replace("@SectionName", section.title)  \
                             .replace("@PageListItems", PageListItems)
                 
                 MinorListItems += \
                     self.templateSideMinorItem   \
+                        .replace("@MinorID", f"{minor.id}")       \
                         .replace("@MinorName", minor.title)  \
                         .replace("@SectionListItems", SectionListItems)
             
             MajorListItems += \
                 self.templateSideMajorItem   \
+                    .replace("@MajorID", f"{major.id}")   \
                     .replace("@MajorName", major.title)   \
                     .replace("@MinorListItems", MinorListItems)
         
