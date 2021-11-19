@@ -4,7 +4,7 @@ It is a simple reader that checks validity of documentation files and generates 
 
 ## Dependencies
 
-The reader is fully implemented in **Python**. Please [download](https://www.python.org/downloads/) and install it if you would like to use it.
+The reader is implemented in **Python**. Please [download](https://www.python.org/downloads/) and install it if you would like to use this reader.
 
 ## Documentation Format
 
