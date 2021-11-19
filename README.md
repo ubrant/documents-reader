@@ -6,6 +6,8 @@ It is a simple reader that checks validity of documentation files and generates 
 
 The reader is implemented in **Python**. Please [download](https://www.python.org/downloads/) and install it if you would like to use this reader.
 
+> Make sure to Check "Add Python to PATH" while installing
+
 ## Documentation Format
 
 Format for documents is maintained in separate [repository](https://github.com/ubrant/documents-format).
