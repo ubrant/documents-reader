@@ -421,7 +421,7 @@ class WebContentGenerator:
 
         # /text/
         #  <span class="italicized">----</span>
-        text = sub('//(.*?)//', '<span class="italicized">\\1</span>', text)
+        text = sub('/-(.*?)-/', '<span class="italicized">\\1</span>', text)
         
         return text
 
