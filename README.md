@@ -10,7 +10,7 @@ The reader is implemented in **Python**. Please [download](https://www.python.or
 
 ## Documentation Format
 
-Format for documents is maintained in separate [repository](https://github.com/ubrant/documents-format).
+Format for documents is maintained in separate [repository](https://github.com/ubrant/documents-format). To use default configuration, put your formatted documents in UBD-Docs folder, as it is being processed. To change this default path, make changes in simple .sh/.bat files; as this path is provided as a command-line argument to main parser.
 
 ## Running the Parser
 
