@@ -417,11 +417,13 @@ class WebContentGenerator:
         
         # {text}
         #  <span class="boldfaced">----</span>
-        text = sub('\{(.*?)\}', '<span class="boldfaced">\\1</span>', text)
+        text = sub('\{b\s*(.*?)\}', '<span class="boldfaced">\\1</span>', text)
+        text = sub('\{B\s*(.*?)\}', '<span class="boldfaced">\\1</span>', text)
 
         # /text/
         #  <span class="italicized">----</span>
-        text = sub('/-(.*?)-/', '<span class="italicized">\\1</span>', text)
+        text = sub('\{i\s*(.*?)\}', '<span class="italicized">\\1</span>', text)
+        text = sub('\{I\s*(.*?)\}', '<span class="italicized">\\1</span>', text)
         
         return text
 

@@ -8,11 +8,11 @@
 
 #H1: Who is this course for?
 
-#Para: I commonly hear it like a term (from my colleagues - mostly) that {xyz programming language} is fit for everyone, but I tend to differ this mindset - one tool fit for all purposes.
+#Para: I commonly hear it like a term (from my colleagues - mostly) that {b xyz programming language} is fit for everyone, but I tend to differ this mindset - one tool fit for all purposes.
 
-#Para: Everyone has his own perception, and that is /-fine-/, so is the case here. People tend to resonate with their own preferences. There used to be a time when only {/-machine-level-/} programming had to be used to program computers, at that time people had no better choices to express themselves to their machines. Now the case is different, you can choose from a vast variety of programming  languages. But hold on... it is not the full story by any means.
+#Para: Everyone has his own perception, and that is {i fine}, so is the case here. People tend to resonate with their own preferences. There used to be a time when only {b{i machine-level}} programming had to be used to program computers, at that time people had no better choices to express themselves to their machines. Now the case is different, you can choose from a vast variety of programming  languages. But hold on... it is not the full story by any means.
 
-#Para: Have you ever thought about purposes of all these proliferated programming languages, trying to attract generic audience like us by showing that how easy it is to learn their created language and how easy it is to "{program}" computers using their creations.
+#Para: Have you ever thought about purposes of all these proliferated programming languages, trying to attract generic audience like us by showing that how easy it is to learn their created language and how easy it is to "{b program}" computers using their creations.
 
 This all confuses novices in choosing right tools for themselves.
 
@@ -21,7 +21,7 @@ This all confuses novices in choosing right tools for themselves.
 #H2: What should I learn then?
 
 #Para: Point here is: There is a vast number of form-factor available to be programmed.
-You can program very small devices, like {micro-controllers} that have just few killobytes of RAM, and similar amount of ROM to save your code, for example a remote-control.
+You can program very small devices, like {b micro-controllers} that have just few killobytes of RAM, and similar amount of ROM to save your code, for example a remote-control.
 
 On the other hand, there are available Super Computers (probably Super Duper Computers), that you never bother about overcoming their resources.
 
