@@ -9,6 +9,7 @@ from os.path    import sep
 #          2 => recursion-enabled  [True/False]
 #          3 => recursion-depth    [1000000 => infinite]
 #          4 => output-directory
+#          5 => base-url
 ####
 class Settings:
     def __init__(self):
@@ -22,6 +23,7 @@ class Settings:
         self.scanDir: str = workingDir
         self.isRecursive: bool = True
         self.recursionDepth: int = 1000000
+        self.baseUrl: str = "https://ubrant.com"
 
         self.libCssBootstrapFile: str  = join(workingDir, libsDir, "bootstrap.min.css")
         self.libCssSiteStylesFile: str = join(workingDir, libsDir, "site-styles.css")
@@ -80,6 +82,10 @@ class Settings:
         # Output path
         if(argv):
             self.outputDir = argv.pop(0)
+        
+        # Base URL
+        if(argv):
+            self.baseUrl = argv.pop(0)
 
         # Spoiling remaining elements
         while(argv):
@@ -96,7 +102,7 @@ class Settings:
             recursion = "Enabled"
         
         recursionDepth = self.recursionDepth
-        if(recursionDepth == 1000000):
+        if(recursionDepth >= 1000000):
             recursionDepth = "Infinite"
         
         scriptDirInd = "<script-dir>"
@@ -133,6 +139,7 @@ class Settings:
         print(f"{indent}Recursion              *> {recursion}")
         print(f"{indent}Recursion Depth        *> {recursionDepth}")
         print(f"{indent}Output Path            *> {outputDir}")
+        print(f"{indent}Base URL               *> {self.baseUrl}")
         
         print(f"{indent}Library:")
         print(f"{indent2}(Bootstrap)    -> {libCssBootstrapFile}")

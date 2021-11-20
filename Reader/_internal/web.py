@@ -404,16 +404,19 @@ class WebContentGenerator:
             if s3 != None: sMajor = int(s3.group(3))
             if s4 != None: sMajor = int(s4.group(3))
 
-            if s1 != None: sMinor = int(s1.group(4))
-            if s2 != None: sMinor = int(s2.group(4))
-            if s3 != None: sMinor = int(s3.group(4))
+            if sMajor == None:
+                text = text.replace(m, f"<a href=\"{self.settings.baseUrl}\" class=\"link\" title=\"{sHint}\">{sText}</a>")
+            else:
+                if s1 != None: sMinor = int(s1.group(4))
+                if s2 != None: sMinor = int(s2.group(4))
+                if s3 != None: sMinor = int(s3.group(4))
 
-            if s1 != None: sSection = int(s1.group(5))
-            if s2 != None: sSection = int(s2.group(5))
+                if s1 != None: sSection = int(s1.group(5))
+                if s2 != None: sSection = int(s2.group(5))
 
-            if s1 != None: sPage = s1.group(6)
+                if s1 != None: sPage = s1.group(6)
             
-            text = text.replace(m, f"<a href=\"{self.getSelfAddressURL(sMajor, sMinor, sSection, sPage)}\" class=\"link\" title=\"{sHint}\">{sText}</a>")
+                text = text.replace(m, f"<a href=\"{self.getSelfAddressURL(sMajor, sMinor, sSection, sPage)}\" class=\"link\" title=\"{sHint}\">{sText}</a>")
         
         # {text}
         #  <span class="boldfaced">----</span>
