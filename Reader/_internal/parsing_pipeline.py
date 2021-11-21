@@ -172,167 +172,167 @@ def processPageTextElements(
                 filename: str,
                 lineNumber: int, uncommentedLineText: str, uncommentedLineTextTrimmed: str) -> bool:
     
-    if uncommentedLineTextTrimmed == "": return False
-    
-    trimmedLowercaseLine = trimLR(uncommentedLineText).lower()
-    secondHalfLine = getSecondRestOfString(uncommentedLineText)
     page = data.getActivePage()
-
+    trimmedLowercaseLine = uncommentedLineTextTrimmed.lower()
+    
     internalErrorPattern = "    Error:{} in {} at line#{}"
     errorMessage = ""
 
     isHandled = False
 
-    # Section Tags
-    if (isHandled == False and trimmedLowercaseLine.startswith("$h1:")):
-        errorMessage = page.addSectionH1(secondHalfLine)
-        isHandled = True
+    if uncommentedLineTextTrimmed != "":
+        secondHalfLine = getSecondRestOfString(uncommentedLineText)
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("$h2:")):
-        errorMessage = page.addSectionH2(secondHalfLine)
-        isHandled = True
+        # Section Tags
+        if (isHandled == False and trimmedLowercaseLine.startswith("$h1:")):
+            errorMessage = page.addSectionH1(secondHalfLine)
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("$dt:")):
-        errorMessage = page.addSectionDescription(secondHalfLine)
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("$h2:")):
+            errorMessage = page.addSectionH2(secondHalfLine)
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("$qt:")):
-        errorMessage = page.addSectionQuote(secondHalfLine)
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("$dt:")):
+            errorMessage = page.addSectionDescription(secondHalfLine)
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("$qb:")):
-        errorMessage = page.addSectionQuoteBy(secondHalfLine)
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("$qt:")):
+            errorMessage = page.addSectionQuote(secondHalfLine)
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("$bg:")):
-        imageFilename = trimLR(secondHalfLine)
-        if not isfile(imageFilename):
-            tempFilename = join(foldername, imageFilename)
-            if isfile(tempFilename):
-                errorMessage = page.addSectionBackground(tempFilename)
-            else:
-                errorMessage = f"Cannot find image file {imageFilename}"
-        else:
-            errorMessage = page.addSectionBackground(imageFilename)
-        
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("$qb:")):
+            errorMessage = page.addSectionQuoteBy(secondHalfLine)
+            isHandled = True
 
-    # Heading Tags
-    if (isHandled == False and trimmedLowercaseLine.startswith("#h1:")):
-        errorMessage = page.addH1(secondHalfLine)
-        isHandled = True
-
-    if (isHandled == False and trimmedLowercaseLine.startswith("#h2:")):
-        errorMessage = page.addH2(secondHalfLine)
-        isHandled = True
-
-    if (isHandled == False and trimmedLowercaseLine.startswith("#h3:")):
-        errorMessage = page.addH3(secondHalfLine)
-        isHandled = True
-
-    if (isHandled == False and trimmedLowercaseLine.startswith("#h4:")):
-        errorMessage = page.addH4(secondHalfLine)
-        isHandled = True
-
-    if (isHandled == False and trimmedLowercaseLine.startswith("#h5:")):
-        errorMessage = page.addH5(secondHalfLine)
-        isHandled = True
-
-    if (isHandled == False and trimmedLowercaseLine.startswith("#h6:")):
-        errorMessage = page.addH6(secondHalfLine)
-        isHandled = True
-
-    # Paragraph Tag
-    if (isHandled == False and trimmedLowercaseLine.startswith("#para:")):
-        errorMessage = page.addPara(secondHalfLine)
-        isHandled = True
-
-    # List Tag
-    if (isHandled == False and trimmedLowercaseLine.startswith("#list:")):
-        errorMessage = page.addUnorderedList(secondHalfLine)
-        isHandled = True
-
-    # Image Tag
-    if (isHandled == False and trimmedLowercaseLine.startswith("#image:")):
-        imageCaption, imageFilename = getImageCaptionAndFilename(uncommentedLineText)
-        if (imageCaption == "" and imageFilename == ""):
-            errorMessage = "Invalid Image Tag"
-        else:
+        if (isHandled == False and trimmedLowercaseLine.startswith("$bg:")):
+            imageFilename = trimLR(secondHalfLine)
             if not isfile(imageFilename):
                 tempFilename = join(foldername, imageFilename)
                 if isfile(tempFilename):
-                    errorMessage = page.addImage(imageCaption, tempFilename)
+                    errorMessage = page.addSectionBackground(tempFilename)
                 else:
                     errorMessage = f"Cannot find image file {imageFilename}"
             else:
-                errorMessage = page.addImage(imageCaption, imageFilename)
-        isHandled = True
-    
-    # Question Tags
-    if (isHandled == False and trimmedLowercaseLine.startswith("@question")):
-        errorMessage = page.addQuestion()
-        isHandled = True
+                errorMessage = page.addSectionBackground(imageFilename)
+            
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("#difficulty:")):
-        difficulty = PageQuestion.DIFFICULTY_EASY
-        ds = secondHalfLine.lower()
+        # Heading Tags
+        if (isHandled == False and trimmedLowercaseLine.startswith("#h1:")):
+            errorMessage = page.addH1(secondHalfLine)
+            isHandled = True
+
+        if (isHandled == False and trimmedLowercaseLine.startswith("#h2:")):
+            errorMessage = page.addH2(secondHalfLine)
+            isHandled = True
+
+        if (isHandled == False and trimmedLowercaseLine.startswith("#h3:")):
+            errorMessage = page.addH3(secondHalfLine)
+            isHandled = True
+
+        if (isHandled == False and trimmedLowercaseLine.startswith("#h4:")):
+            errorMessage = page.addH4(secondHalfLine)
+            isHandled = True
+
+        if (isHandled == False and trimmedLowercaseLine.startswith("#h5:")):
+            errorMessage = page.addH5(secondHalfLine)
+            isHandled = True
+
+        if (isHandled == False and trimmedLowercaseLine.startswith("#h6:")):
+            errorMessage = page.addH6(secondHalfLine)
+            isHandled = True
+
+        # Paragraph Tag
+        if (isHandled == False and trimmedLowercaseLine.startswith("#para:")):
+            errorMessage = page.addPara(secondHalfLine)
+            isHandled = True
+
+        # List Tag
+        if (isHandled == False and trimmedLowercaseLine.startswith("#list:")):
+            errorMessage = page.addUnorderedList(secondHalfLine)
+            isHandled = True
+
+        # Image Tag
+        if (isHandled == False and trimmedLowercaseLine.startswith("#image:")):
+            imageCaption, imageFilename = getImageCaptionAndFilename(uncommentedLineText)
+            if (imageCaption == "" and imageFilename == ""):
+                errorMessage = "Invalid Image Tag"
+            else:
+                if not isfile(imageFilename):
+                    tempFilename = join(foldername, imageFilename)
+                    if isfile(tempFilename):
+                        errorMessage = page.addImage(imageCaption, tempFilename)
+                    else:
+                        errorMessage = f"Cannot find image file {imageFilename}"
+                else:
+                    errorMessage = page.addImage(imageCaption, imageFilename)
+            isHandled = True
         
-        if ds == "medium":
-            difficulty = PageQuestion.DIFFICULTY_MEDIUM
-        elif ds == "hard":
-            difficulty = PageQuestion.DIFFICULTY_HARD
-        
-        errorMessage = page.addQuestionDifficulty(difficulty)
-        isHandled = True
+        # Question Tags
+        if (isHandled == False and trimmedLowercaseLine.startswith("@question")):
+            errorMessage = page.addQuestion()
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("#text:")):
-        errorMessage = page.addQuestionText(secondHalfLine)
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("#difficulty:")):
+            difficulty = PageQuestion.DIFFICULTY_EASY
+            ds = secondHalfLine.lower()
+            
+            if ds == "medium":
+                difficulty = PageQuestion.DIFFICULTY_MEDIUM
+            elif ds == "hard":
+                difficulty = PageQuestion.DIFFICULTY_HARD
+            
+            errorMessage = page.addQuestionDifficulty(difficulty)
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("#opta:")):
-        errorMessage = page.addQuestionOptA(secondHalfLine)
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("#text:")):
+            errorMessage = page.addQuestionText(secondHalfLine)
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("#optb:")):
-        errorMessage = page.addQuestionOptB(secondHalfLine)
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("#opta:")):
+            errorMessage = page.addQuestionOptA(secondHalfLine)
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("#optc:")):
-        errorMessage = page.addQuestionOptC(secondHalfLine)
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("#optb:")):
+            errorMessage = page.addQuestionOptB(secondHalfLine)
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("#optd:")):
-        errorMessage = page.addQuestionOptD(secondHalfLine)
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("#optc:")):
+            errorMessage = page.addQuestionOptC(secondHalfLine)
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("#opte:")):
-        errorMessage = page.addQuestionOptE(secondHalfLine)
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("#optd:")):
+            errorMessage = page.addQuestionOptD(secondHalfLine)
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("#optf:")):
-        errorMessage = page.addQuestionOptF(secondHalfLine)
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("#opte:")):
+            errorMessage = page.addQuestionOptE(secondHalfLine)
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("#optg:")):
-        errorMessage = page.addQuestionOptG(secondHalfLine)
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("#optf:")):
+            errorMessage = page.addQuestionOptF(secondHalfLine)
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("#attempts:")):
-        na = 0
-        try:
-            na = int(secondHalfLine)
-            errorMessage = page.addQuestionAttempts(secondHalfLine)
-        except:
-            errorMessage = "Invalid number of attempts"
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("#optg:")):
+            errorMessage = page.addQuestionOptG(secondHalfLine)
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("#answer:")):
-        errorMessage = page.addQuestionAnswer(secondHalfLine)
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("#attempts:")):
+            na = 0
+            try:
+                na = int(secondHalfLine)
+                errorMessage = page.addQuestionAttempts(secondHalfLine)
+            except:
+                errorMessage = "Invalid number of attempts"
+            isHandled = True
 
-    if (isHandled == False and trimmedLowercaseLine.startswith("#explanation:")):
-        errorMessage = page.addQuestionExplanation(secondHalfLine)
-        isHandled = True
+        if (isHandled == False and trimmedLowercaseLine.startswith("#answer:")):
+            errorMessage = page.addQuestionAnswer(secondHalfLine)
+            isHandled = True
+
+        if (isHandled == False and trimmedLowercaseLine.startswith("#explanation:")):
+            errorMessage = page.addQuestionExplanation(secondHalfLine)
+            isHandled = True
 
     ## Have we handled it ...?
     if (isHandled == True):
