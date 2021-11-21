@@ -301,6 +301,25 @@ class WebContentGenerator:
             
             return self.templateContentListUnordered \
                                 .replace("@ListItems", ListItems)
+
+        # Code
+        if type(element) == PageCode:
+            Language = element.language
+            Code = ""
+            totalLines = len(element.textElements)
+            lineNo = 0
+            for te in element.textElements:
+                lineNo += 1
+                Code += te.text \
+                            .replace(">", "&gt;")    \
+                            .replace("<", "&lt;")    \
+                            .replace(" ", "&nbsp;")
+                if lineNo < totalLines:
+                    Code += "\n"
+            
+            return self.templateContentCode \
+                                .replace("@Language", Language) \
+                                .replace("@Code", Code)
         
         # Image
         if type(element) == PageImage:

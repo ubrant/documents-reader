@@ -100,6 +100,14 @@ body {
   margin-bottom: 2em;
 }
 
+.code-block {
+  background-color: rgb(224, 218, 218);
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 0.8em 0.8em 0.8em 1.5em;
+  border-radius: 0.5rem;
+}
+
 .figure {
   margin-bottom: 2.2em;
 }
