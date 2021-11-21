@@ -84,10 +84,12 @@ def processMajorIdElement(
                 data: Data,
                 foldername: str,
                 filename: str,
-                lineNumber: int, lineText: str) -> bool:
+                lineNumber: int, uncommentedLineText: str, uncommentedLineTextTrimmed: str) -> bool:
     
-    if (lineText.lstrip().lower().startswith("@major")):
-        idString, titleString = getSecondAndThirdRestOfString(lineText)
+    if uncommentedLineTextTrimmed == "": return False
+
+    if (uncommentedLineText.lstrip().lower().startswith("@major")):
+        idString, titleString = getSecondAndThirdRestOfString(uncommentedLineText)
         id = 0
         try:
             id = int(idString)
@@ -106,10 +108,12 @@ def processMinorIdElement(
                 data: Data,
                 foldername: str,
                 filename: str,
-                lineNumber: int, lineText: str) -> bool:
+                lineNumber: int, uncommentedLineText: str, uncommentedLineTextTrimmed: str) -> bool:
     
-    if (lineText.lstrip().lower().startswith("@minor")):
-        idString, titleString = getSecondAndThirdRestOfString(lineText)
+    if uncommentedLineTextTrimmed == "": return False
+    
+    if (uncommentedLineText.lstrip().lower().startswith("@minor")):
+        idString, titleString = getSecondAndThirdRestOfString(uncommentedLineText)
         id = 0
         try:
             id = int(idString)
@@ -129,10 +133,12 @@ def processSectionIdElement(
                 data: Data,
                 foldername: str,
                 filename: str,
-                lineNumber: int, lineText: str) -> bool:
+                lineNumber: int, uncommentedLineText: str, uncommentedLineTextTrimmed: str) -> bool:
     
-    if (lineText.lstrip().lower().startswith("@section")):
-        idString, titleString = getSecondAndThirdRestOfString(lineText)
+    if uncommentedLineTextTrimmed == "": return False
+    
+    if (uncommentedLineText.lstrip().lower().startswith("@section")):
+        idString, titleString = getSecondAndThirdRestOfString(uncommentedLineText)
         id = 0
         try:
             id = int(idString)
@@ -153,10 +159,12 @@ def processPageIdElement(
                 data: Data,
                 foldername: str,
                 filename: str,
-                lineNumber: int, lineText: str) -> bool:
+                lineNumber: int, uncommentedLineText: str, uncommentedLineTextTrimmed: str) -> bool:
     
-    if (lineText.lstrip().lower().startswith("@page")):
-        idString, titleString = getSecondAndThirdRestOfString(lineText)
+    if uncommentedLineTextTrimmed == "": return False
+    
+    if (uncommentedLineText.lstrip().lower().startswith("@page")):
+        idString, titleString = getSecondAndThirdRestOfString(uncommentedLineText)
         id = 0
         try:
             id = int(idString)
@@ -175,10 +183,12 @@ def processPageTextElements(
                 data: Data,
                 foldername: str,
                 filename: str,
-                lineNumber: int, lineText: str) -> bool:
+                lineNumber: int, uncommentedLineText: str, uncommentedLineTextTrimmed: str) -> bool:
     
-    trimmedLowercaseLine = trimLR(lineText).lower()
-    secondHalfLine = getSecondRestOfString(lineText)
+    if uncommentedLineTextTrimmed == "": return False
+    
+    trimmedLowercaseLine = trimLR(uncommentedLineText).lower()
+    secondHalfLine = getSecondRestOfString(uncommentedLineText)
     page = data.getActivePage()
 
     internalErrorPattern = "    Error:{} in {} at line#{}"
@@ -257,7 +267,7 @@ def processPageTextElements(
 
     # Image Tag
     if (isHandled == False and trimmedLowercaseLine.startswith("#image:")):
-        imageCaption, imageFilename = getImageCaptionAndFilename(lineText)
+        imageCaption, imageFilename = getImageCaptionAndFilename(uncommentedLineText)
         if (imageCaption == "" and imageFilename == ""):
             errorMessage = "Invalid Image Tag"
         else:
@@ -344,7 +354,7 @@ def processPageTextElements(
         
         return True
     else:
-        errorMessage = page.appendText(lineText)
+        errorMessage = page.appendText(uncommentedLineText)
         if (errorMessage != None and errorMessage != ""):
             print(internalErrorPattern.format(errorMessage, filename, lineNumber))
         else:
@@ -362,22 +372,22 @@ processPipeline = [
     processPageIdElement,
     processPageTextElements
 ]
-def parseDataLine(
+def parseUncommentedLine(
                 data: Data,
                 foldername: str,
                 filename: str,
-                lineNumber: int, lineText: str) -> None:
+                lineNumber: int, uncommentedLineText: str) -> None:
     
     if (filename != data.lastProcessedFilename):
         data.updateProcessingState(filename, None, None, None, None)
     
     success = False
     for p in processPipeline:
-        success = p(data, foldername, filename, lineNumber, lineText)
+        success = p(data, foldername, filename, lineNumber, uncommentedLineText, trimLR(uncommentedLineText))
         if success:
             break
     
-    if (not success):
+    if (not success and trimLR(uncommentedLineText) != ""):
         print(f"Error: Cannot parse line#{lineNumber} in {filename}")
     
     return

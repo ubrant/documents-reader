@@ -11,8 +11,8 @@ class Parser:
     def loadFile(self, filename: str):
         foldername = stripLastPartFromPath(filename)
         for ln, l in readFileWithLineNumbers(filename):
-            if l.lstrip().startswith("~") == False and l.lstrip().rstrip() != "":
-                parseDataLine(self.data, foldername, filename, ln, l)
+            if not l.lstrip().startswith("~"):
+                parseUncommentedLine(self.data, foldername, filename, ln, l)
         
         return
     
