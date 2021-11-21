@@ -83,6 +83,7 @@ class WebContentGenerator:
         self.templateContentHeading5: str = loadFileText(indent, self.settings.templateContentHeading5File)
         self.templateContentHeading6: str = loadFileText(indent, self.settings.templateContentHeading6File)
         self.templateContentImage: str = loadFileText(indent, self.settings.templateContentImageFile)
+        self.templateContentCode: str = loadFileText(indent, self.settings.templateContentCodeFile)
         self.templateContentListUnordered: str = loadFileText(indent, self.settings.templateContentListUnorderedFile)
         self.templateContentListUnorderedItem: str = loadFileText(indent, self.settings.templateContentListUnorderedItemFile)
         self.templateContentPara: str = loadFileText(indent, self.settings.templateContentParaFile)
