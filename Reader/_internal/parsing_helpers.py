@@ -6,19 +6,6 @@ from typing                    import Tuple, Type
 from re                        import sub, search
 
 ######
-# File Reading
-####
-def readFileWithLineNumbers(filename: str) -> Tuple[int, str]:
-    f = open(filename, "rU", 8192, "utf-8-sig")
-    ln = 0
-    for line in f:
-        ln += 1
-        yield (ln, sub("\r", "", sub("\n", "", line)))
-
-    f.close()
-    return
-
-######
 # Common Extractors
 ####
 def stripLastPartFromPath(filename: str) -> Type[str]:
