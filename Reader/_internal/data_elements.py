@@ -125,7 +125,8 @@ class PageUnorderedList:
 
 # Code
 class PageCode:
-    def __init__(self) -> None:
+    def __init__(self, language: str) -> None:
+        self.language = language
         self.textElements: List[TextElement] = []
         return
 
@@ -255,6 +256,12 @@ class Page:
         tlist.append(text)
         self.elements.append(tlist)
         self.lastElementIdentifier = Page.PAGE_LAST_ELEMENT_OTHER
+        return ""
+
+    # Code
+    def addCode(self, text: str) -> str:
+        self.lastElementIdentifier = Page.PAGE_LAST_ELEMENT_OTHER
+        self.elements.append(PageCode(text))
         return ""
 
     # Image

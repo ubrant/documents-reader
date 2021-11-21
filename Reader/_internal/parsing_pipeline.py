@@ -251,6 +251,11 @@ def processPageTextElements(
             errorMessage = page.addUnorderedList(secondHalfLine)
             isHandled = True
 
+        # Code Tag
+        if (isHandled == False and trimmedLowercaseLine.startswith("#code:")):
+            errorMessage = page.addCode(secondHalfLine)
+            isHandled = True
+
         # Image Tag
         if (isHandled == False and trimmedLowercaseLine.startswith("#image:")):
             imageCaption, imageFilename = getImageCaptionAndFilename(uncommentedLineText)
