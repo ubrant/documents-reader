@@ -61,12 +61,18 @@ tsStartProcessingFiles = datetime.now()
 print("Processing Files")
 print("----------------")
 
+numFilesLoaded: int = 0
 parser = Parser()
 for file in getDesiredFiles(settings, ".ubd"):
     print(f"Reading {file}")
     parser.loadFile(file)
+    numFilesLoaded += 1
 
 print("")
+
+if numFilesLoaded == 0:
+    print("No ubd file found ...")
+    exit(0)
 
 ######
 # Writing Files
