@@ -1,8 +1,8 @@
-from _internal.parsing_helpers import *
-from _internal.data_elements   import *
+from _internal.parsing_pipeline import *
+from _internal.data_elements    import *
 
-from typing                    import Type
-from re                        import sub
+from typing                     import Type
+from re                         import sub
 
 ######
 # File Reading
