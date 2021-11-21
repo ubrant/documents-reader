@@ -123,6 +123,17 @@ class PageUnorderedList:
             self.textElements.append(TextElement(text))
         return ""
 
+# Code
+class PageCode:
+    def __init__(self) -> None:
+        self.textElements: List[TextElement] = []
+        return
+
+    def append(self, textTrimmed: str, textFull: str) -> str:
+        if textTrimmed != "":
+            self.textElements.append(TextElement(textTrimmed))
+        return ""
+
 # Image
 class PageImage:
     def __init__(self, caption: str, filename: str) -> None:
@@ -358,7 +369,11 @@ class Page:
             return self.section.append(None, None, None, None, None, textTrimmed)
         else:
             if len(self.elements) > 0:
-                return self.elements[-1].append(textTrimmed)
+                e = self.elements[-1]
+                if type(e) == PageCode:
+                    return e.append(textTrimmed, textFull)
+                elif textTrimmed != "":
+                    return e.append(textTrimmed)
             
             if textTrimmed != "":
                 return "Cannot append text to any element"
