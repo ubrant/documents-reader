@@ -126,13 +126,21 @@ class PageUnorderedList:
 # Code
 class PageCode:
     def __init__(self, language: str) -> None:
-        self.language = language
+        self.language: str = language
         self.textElements: List[TextElement] = []
+        self.tempTextElements: List[TextElement] = []
         return
 
     def append(self, textTrimmed: str, textFull: str) -> str:
-        if textTrimmed != "":
-            self.textElements.append(TextElement(textTrimmed))
+        if textTrimmed == "":
+            # Save blank lines if some code lines are already existing
+            if len(self.textElements) > 0:
+                self.tempTextElements.append(TextElement(textFull))
+        else:
+            for te in self.tempTextElements:
+                self.textElements.append(te)
+            self.tempTextElements.clear()
+            self.textElements.append(TextElement(textFull))
         return ""
 
 # Image

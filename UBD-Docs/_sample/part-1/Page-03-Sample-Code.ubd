@@ -1,0 +1,59 @@
+﻿
+~ IDs 100000 ➠ 199999 are reserved for non-technical groups
+~ IDs 200000 ➠ 299999 are reserved for technical groups
+@Major     200000
+@Minor     1
+@Section   1
+@Page      3         Sample code
+
+
+
+
+#H1: Here is the Sample
+
+~ Java
+#Para: Following is the sample from {B Java}.
+
+#Code: java
+{
+    int a = 5;
+    int b = 6;
+    int sum = a + b;
+}
+
+
+
+
+
+~ Python
+#Para: Following is the sample from {B Python}.
+
+#Code: python
+if len(my_array) < 20:
+    print("No additional values provided")
+else:
+    print("That's good, you're adding some values")
+
+def func_mine():
+    print("Hello from mine")
+
+func_mine()
+
+
+
+
+
+~ C++
+#Para: Following is the sample from {B C++}.
+
+#Code: cplusplus
+
+
+
+void p(){
+    cout << "Hello World";
+}
+
+
+
+
