@@ -343,23 +343,27 @@ class Page:
         return ""
 
     # Text without Tags
-    def appendText(self, text: str) -> str:
+    def appendText(self, textTrimmed: str, textFull: str) -> str:
         if self.lastElementIdentifier == Page.PAGE_LAST_ELEMENT_SECTION_H1:
-            return self.section.append(text, None, None, None, None, None)
+            return self.section.append(textTrimmed, None, None, None, None, None)
         elif self.lastElementIdentifier == Page.PAGE_LAST_ELEMENT_SECTION_H2:
-            return self.section.append(None, text, None, None, None, None)
+            return self.section.append(None, textTrimmed, None, None, None, None)
         elif self.lastElementIdentifier == Page.PAGE_LAST_ELEMENT_SECTION_DESCRIPTION:
-            return self.section.append(None, None, text, None, None, None)
+            return self.section.append(None, None, textTrimmed, None, None, None)
         elif self.lastElementIdentifier == Page.PAGE_LAST_ELEMENT_SECTION_QUOTE:
-            return self.section.append(None, None, None, text, None, None)
+            return self.section.append(None, None, None, textTrimmed, None, None)
         elif self.lastElementIdentifier == Page.PAGE_LAST_ELEMENT_SECTION_QUOTE_BY:
-            return self.section.append(None, None, None, None, text, None)
+            return self.section.append(None, None, None, None, textTrimmed, None)
         elif self.lastElementIdentifier == Page.PAGE_LAST_ELEMENT_SECTION_BACKGROUND:
-            return self.section.append(None, None, None, None, None, text)
+            return self.section.append(None, None, None, None, None, textTrimmed)
         else:
             if len(self.elements) > 0:
-                return self.elements[-1].append(text)
-            return "Cannot append text to any element"
+                return self.elements[-1].append(textTrimmed)
+            
+            if textTrimmed != "":
+                return "Cannot append text to any element"
+            else:
+                return ""
 
 ######
 # Section Element

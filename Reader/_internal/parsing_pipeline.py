@@ -175,7 +175,6 @@ def processPageTextElements(
     page = data.getActivePage()
     trimmedLowercaseLine = uncommentedLineTextTrimmed.lower()
     
-    internalErrorPattern = "    Error:{} in {} at line#{}"
     errorMessage = ""
 
     isHandled = False
@@ -335,13 +334,14 @@ def processPageTextElements(
             isHandled = True
 
     ## Have we handled it ...?
+    internalErrorPattern = "    Error:{} in {} at line#{}"
     if (isHandled == True):
         if (errorMessage != None and errorMessage != ""):
             print(internalErrorPattern.format(errorMessage, filename, lineNumber))
         
         return True
     else:
-        errorMessage = page.appendText(uncommentedLineText)
+        errorMessage = page.appendText(uncommentedLineTextTrimmed, uncommentedLineText)
         if (errorMessage != None and errorMessage != ""):
             print(internalErrorPattern.format(errorMessage, filename, lineNumber))
         else:
