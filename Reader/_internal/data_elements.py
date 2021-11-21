@@ -387,7 +387,7 @@ class Section:
             return True
         return False
 
-    def sort(self):
+    def filterAndSort(self):
         temp: List[Page] = []
         minId: int = 0
         maxId: int = 0
@@ -402,7 +402,7 @@ class Section:
         # Sorting as per IDs
         for i in range(minId, maxId + 1):
             for p in self.pages:
-                if p.id == i:
+                if p.id >= 0 and p.id == i:
                     temp.append(p)
 
         # Replacing and returning
@@ -435,7 +435,7 @@ class Minor:
             return True
         return False
 
-    def sort(self):
+    def filterAndSort(self):
         temp: List[Section] = []
         minId: int = 0
         maxId: int = 0
@@ -450,8 +450,8 @@ class Minor:
         # Sorting as per IDs
         for i in range(minId, maxId + 1):
             for s in self.sections:
-                if s.id == i:
-                    temp.append(s.sort())
+                if s.id >= 0 and s.id == i:
+                    temp.append(s.filterAndSort())
 
         # Replacing and returning
         self.sections = temp
@@ -483,7 +483,7 @@ class Major:
             return True
         return False
 
-    def sort(self):
+    def filterAndSort(self):
         temp: List[Minor] = []
         minId: int = 0
         maxId: int = 0
@@ -498,8 +498,8 @@ class Major:
         # Sorting as per IDs
         for i in range(minId, maxId + 1):
             for m in self.minors:
-                if m.id == i:
-                    temp.append(m.sort())
+                if m.id >= 0 and m.id == i:
+                    temp.append(m.filterAndSort())
 
         # Replacing and returning
         self.minors = temp
@@ -512,10 +512,10 @@ class Major:
 # - Data is segregated into Major partitions
 ####
 class Data:
-    DEFAULT_MAJOR_ELEMENT_ID = 0
-    DEFAULT_MINOR_ELEMENT_ID = 0
-    DEFAULT_SECTION_ELEMENT_ID = 0
-    DEFAULT_PAGE_ELEMENT_ID = 0
+    DEFAULT_MAJOR_ELEMENT_ID = -1
+    DEFAULT_MINOR_ELEMENT_ID = -1
+    DEFAULT_SECTION_ELEMENT_ID = -1
+    DEFAULT_PAGE_ELEMENT_ID = -1
     
     def __init__(my) -> None:
         my.majors: List[Major] = []
@@ -585,7 +585,7 @@ class Data:
                   .getOrAddNewSectionElementById(my.currentSectionElementId)
                   .getOrAddNewPageElementById(my.currentPageElementId))
 
-    def sort(me):
+    def filterAndSort(me):
         temp: List[Major] = []
         minId: int = 0
         maxId: int = 0
@@ -600,8 +600,8 @@ class Data:
         # Sorting as per IDs
         for i in range(minId, maxId + 1):
             for m in me.majors:
-                if m.id == i:
-                    temp.append(m.sort())
+                if m.id >= 0 and m.id == i:
+                    temp.append(m.filterAndSort())
 
         # Replacing and returning
         me.majors = temp

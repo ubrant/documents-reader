@@ -85,7 +85,7 @@ tsStartWritingWebContent = datetime.now()
 print("Generating Web Content")
 print("----------------------")
 
-webGenerator = WebContentGenerator(settings, parser.getParsedData())
+webGenerator = WebContentGenerator(settings, parser.getParsedAndFilteredData())
 webGenerator.generateOutput()
 webGenerator.openOutput()
 

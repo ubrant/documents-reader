@@ -32,5 +32,5 @@ class Parser:
         
         return
     
-    def getParsedData(self) -> Type[Data]:
-        return self.data.sort()
+    def getParsedAndFilteredData(self) -> Type[Data]:
+        return self.data.filterAndSort()
