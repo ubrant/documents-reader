@@ -84,6 +84,7 @@ class WebContentGenerator:
         self.templateContentHeading6: str = loadFileText(indent, self.settings.templateContentHeading6File)
         self.templateContentImage: str = loadFileText(indent, self.settings.templateContentImageFile)
         self.templateContentCode: str = loadFileText(indent, self.settings.templateContentCodeFile)
+        self.templateContentConsole: str = loadFileText(indent, self.settings.templateContentConsoleFile)
         self.templateContentListUnordered: str = loadFileText(indent, self.settings.templateContentListUnorderedFile)
         self.templateContentListUnorderedItem: str = loadFileText(indent, self.settings.templateContentListUnorderedItemFile)
         self.templateContentPara: str = loadFileText(indent, self.settings.templateContentParaFile)
@@ -320,6 +321,23 @@ class WebContentGenerator:
             return self.templateContentCode \
                                 .replace("@Language", Language) \
                                 .replace("@Code", Code)
+
+        # Console
+        if type(element) == PageConsole:
+            ConsoleText = ""
+            totalLines = len(element.textElements)
+            lineNo = 0
+            for te in element.textElements:
+                lineNo += 1
+                ConsoleText += te.text \
+                            .replace(">", "&gt;")    \
+                            .replace("<", "&lt;")    \
+                            .replace(" ", "&nbsp;")
+                if lineNo < totalLines:
+                    ConsoleText += "\n"
+            
+            return self.templateContentConsole \
+                                .replace("@ConsoleText", ConsoleText)
         
         # Image
         if type(element) == PageImage:

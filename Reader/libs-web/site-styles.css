@@ -110,6 +110,16 @@ body {
   border-radius: 0.65rem;
 }
 
+.console-block {
+    color: rgb(248, 250, 239);
+    background-color: rgb(0, 9, 1);
+    font-size: medium;
+    margin-top: 1.2em;
+    margin-bottom: 1.2em;
+    padding: 0.85em 0.85em 0.85em 0.85em;
+    border-radius: 0.0rem;
+}
+
 .figure {
   margin-bottom: 2.2em;
 }

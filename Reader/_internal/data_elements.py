@@ -143,6 +143,26 @@ class PageCode:
             self.textElements.append(TextElement(textFull))
         return ""
 
+# Console
+class PageConsole:
+    def __init__(self, textTrimmed: str = "", textFull: str = "") -> None:
+        self.textElements: List[TextElement] = []
+        self.tempTextElements: List[TextElement] = []
+        self.append(textTrimmed, textFull)
+        return
+
+    def append(self, textTrimmed: str, textFull: str) -> str:
+        if textTrimmed == "":
+            # Save blank lines if some console lines are already existing
+            if len(self.textElements) > 0:
+                self.tempTextElements.append(TextElement(textFull))
+        else:
+            for te in self.tempTextElements:
+                self.textElements.append(te)
+            self.tempTextElements.clear()
+            self.textElements.append(TextElement(textFull))
+        return ""
+
 # Image
 class PageImage:
     def __init__(self, caption: str, filename: str) -> None:
@@ -272,6 +292,12 @@ class Page:
         self.elements.append(PageCode(text))
         return ""
 
+    # Console
+    def addConsole(self, text: str) -> str:
+        self.lastElementIdentifier = Page.PAGE_LAST_ELEMENT_OTHER
+        self.elements.append(PageConsole(text, text))
+        return ""
+
     # Image
     def addImage(self, caption: str, filename: str) -> str:
         self.elements.append(PageImage(caption, filename))
@@ -385,7 +411,8 @@ class Page:
         else:
             if len(self.elements) > 0:
                 e = self.elements[-1]
-                if type(e) == PageCode:
+                et = type(e)
+                if et == PageCode or et == PageConsole:
                     return e.append(textTrimmed, textFull)
                 elif textTrimmed != "":
                     return e.append(textTrimmed)

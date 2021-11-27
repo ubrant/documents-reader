@@ -1,0 +1,40 @@
+﻿
+~ IDs 100000 ➠ 199999 are reserved for non-technical groups
+~ IDs 200000 ➠ 299999 are reserved for technical groups
+@Major     200000
+@Minor     1
+@Section   1
+@Page      4         Sample code output
+
+
+
+
+#H1: Here is the Sample Code
+
+~ C#
+#Para: Following is the sample from {B C#}.
+
+#Code: csharp
+{
+    int tableOf = 5;
+    for (int i = 1; i <= 10; i++)
+    {
+        Console.WriteLine($"{tableOf} x {i} = {tableOf * i}");
+    }
+}
+
+#Para: This snippet generates following output.
+
+#Console:
+
+5 x 1 = 5
+5 x 2 = 10
+5 x 3 = 15
+5 x 4 = 20
+5 x 5 = 25
+5 x 6 = 30
+5 x 7 = 35
+5 x 8 = 40
+5 x 9 = 45
+5 x 10 = 50
+
