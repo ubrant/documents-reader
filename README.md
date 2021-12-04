@@ -12,10 +12,10 @@
 
 Helper scripts are included in repository:
 
-> * **run-reader.sh** for Linux distros; *and*
-> 
-> * **run-reader.bat** for Windows
+  * **run-reader.sh** for Linux distros; *and*
+  * **run-reader.bat** for Windows
 
+For using:
 
 1. [Download **Python**](https://www.python.org/downloads/) and install it (if not already available)
     - Make sure to Check "**Add Python to PATH**" while installing
