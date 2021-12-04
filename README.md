@@ -13,6 +13,7 @@
 Helper scripts are included in repository:
 
 > * **run-reader.sh** for Linux distros; *and*
+> 
 > * **run-reader.bat** for Windows
 
 
