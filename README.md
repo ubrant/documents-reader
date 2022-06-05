@@ -15,14 +15,14 @@ Helper scripts are included for easy use:
   * **run-reader.sh** for Linux distros; *and*
   * **run-reader.bat** for Windows
 
-For using:
+For simple use:
 
-1. [Download **Python**](https://www.python.org/downloads/) and install it (if not already available)
+1. [Download **Python**](https://www.python.org/downloads/) and install (if not already available)
     - Make sure to Check ***"Add Python to PATH"*** while installing
 
-2. [Download **Reader's** ZIP](https://github.com/ubrant/documents-reader/archive/refs/heads/main.zip) and unzip it
+2. [Download **Reader**](https://github.com/ubrant/documents-reader/archive/refs/heads/main.zip) and unzip it
 3. Run **run-reader** *.sh/.bat*
-4. Write *UBD* documents
+4. Write *UBD documents*
     - Put formatted documents in UBD-Docs folder, as it is the base folder that is scanned along-with its internal directories by default
     - To change the default behaviour, make changes in *.sh/.bat* files, as command-line arguments are passed-in to the main parser
 5. Repeat steps **3**, **4** and **this one**
