@@ -8,9 +8,9 @@
 
 The *Reader* is completely implemented in **Python**. You need to have python interpreter installed for using it.
 
-## Running
+## Usage
 
-Helper scripts are included in repository:
+Helper scripts are included for easy use:
 
   * **run-reader.sh** for Linux distros; *and*
   * **run-reader.bat** for Windows
