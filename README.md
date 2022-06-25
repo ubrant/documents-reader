@@ -2,7 +2,7 @@
 
 *UBD Documents Reader* is simply a reader that checks validity of [**UBD formatted** documents](https://github.com/ubrant/documents-format) and generates formatted output. It is intended to help (with easy modifications) in feeding data into destination databases or generating any desired format.
 
-> By default output is in form of HTML pages
+> By default HTML pages are generated as output
 
 ## Dependencies
 
