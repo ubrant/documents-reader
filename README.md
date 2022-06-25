@@ -6,7 +6,7 @@
 
 ## Dependencies
 
-The *Reader* is completely implemented in **Python**. You need to have python interpreter installed for using it.
+The *Reader* is fully implemented in **Python**. You need to have python interpreter installed for using it.
 
 ## Usage
 
