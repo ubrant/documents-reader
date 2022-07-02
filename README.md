@@ -21,7 +21,7 @@ For basic usage:
     - Make sure to Check ***"Add Python to PATH"*** while installing
 
 2. [Download ***Reader***](https://github.com/ubrant/documents-reader/archive/refs/heads/main.zip) and unzip it
-3. Run ***run-reader*** **.sh / .bat**
+3. Run ***run-reader*** **.sh/.bat**
 4. Write *UBD documents*
     - Put formatted documents in UBD-Docs folder, as it is the base folder that is scanned along-with its internal directories by default
     - To change the default behaviour, update your *.sh / .bat* files or *Python* scripts - command-line arguments are passed-in to the main parser
