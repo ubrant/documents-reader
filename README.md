@@ -15,7 +15,7 @@ Helper scripts are included for easy use:
   * **run-reader.sh** for Linux distros; *and*
   * **run-reader.bat** for Windows
 
-For simple use:
+For basic usage:
 
 1. [Download **Python**](https://www.python.org/downloads/) and install it (if not already have)
     - Make sure to Check ***"Add Python to PATH"*** while installing
