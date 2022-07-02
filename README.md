@@ -18,7 +18,7 @@ Helper scripts are included for easy use:
 For basic usage:
 
 1. [Download ***Python***](https://www.python.org/downloads/) and install it (if not already have)
-    - Make sure to Check ***"Add Python to PATH"*** while installing
+    - Make sure to Check "**Add Python to PATH**" while installing
 
 2. [Download ***Reader***](https://github.com/ubrant/documents-reader/archive/refs/heads/main.zip) and unzip it
 3. Run ***run-reader*** **.sh/.bat**
