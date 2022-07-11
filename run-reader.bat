@@ -1,6 +1,6 @@
 @echo off
 
-TITLE UB DocumentsReader
+TITLE UBD Reader
 
 set cwd=%cd%
 set do_recursion=true
