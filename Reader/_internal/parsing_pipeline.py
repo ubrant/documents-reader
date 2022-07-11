@@ -1,4 +1,4 @@
-from genericpath import isfile
+from genericpath               import isfile
 from _internal.data_elements   import *
 
 from os.path                   import isfile, join
