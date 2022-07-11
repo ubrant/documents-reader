@@ -118,7 +118,7 @@ print("")
 print("Completed")
 print("---------")
 
-print("Time taken during each phase:")
+print("Phase-wise elapsed time:")
 printElapsedTime(" > ", "Loading Settings", tsStartProcessingFiles - tsStart)
 printElapsedTime(" > ", "Loading Files   ", tsStartWritingWebContent - tsStartProcessingFiles)
 printElapsedTime(" > ", "Writing Files   ", tsEnd - tsStartWritingWebContent)
