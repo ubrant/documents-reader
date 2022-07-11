@@ -60,7 +60,7 @@ def getImageCaptionAndFilename(string: str) -> Tuple[str, str]:
     return (caption, imagename)
 
 ######################################################################
-#                     Parsing Elements From Text                     #
+#                       Parsing Text Elements                        #
 ######################################################################
 
 ######
