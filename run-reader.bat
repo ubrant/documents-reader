@@ -2,7 +2,7 @@
 
 :: *****************************************************************************************
 :: * Purpose:
-:: *     Running of main application by passing-in command-line parameters
+:: *     Running the main application by passing-in command-line parameters
 :: *
 :: *
 :: *****************************************************************************************
