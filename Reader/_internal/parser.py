@@ -23,9 +23,9 @@ from _internal.data_elements    import *
 from typing                     import Type
 from re                         import sub
 
-######
+# ***********
 # File Reading
-####
+# ********
 def readFileWithLineNumbers(filename: str) -> Tuple[int, str]:
     f = open(filename, "rU", 8192, "utf-8-sig")
     ln = 0
@@ -36,9 +36,9 @@ def readFileWithLineNumbers(filename: str) -> Tuple[int, str]:
     f.close()
     return
 
-######
+# ***********
 # Parsing Point
-####
+# ********
 class Parser:
     def __init__(self) -> None:
         self.data = Data()
