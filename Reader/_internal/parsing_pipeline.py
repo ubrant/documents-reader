@@ -82,9 +82,9 @@ def getImageCaptionAndFilename(string: str) -> Tuple[str, str]:
 #                       Parsing Text Elements                        #
 # ****************************************************************** #
 
-######
+# ***********
 # Parsing Major Elements
-####
+# ********
 def processMajorIdElement(
                 data: Data,
                 foldername: str,
@@ -106,9 +106,9 @@ def processMajorIdElement(
         return True
     return False
 
-######
+# ***********
 # Parsing Minor Elements
-####
+# ********
 def processMinorIdElement(
                 data: Data,
                 foldername: str,
@@ -131,9 +131,9 @@ def processMinorIdElement(
         return True
     return False
 
-######
+# ***********
 # Parsing Section Elements
-####
+# ********
 def processSectionIdElement(
                 data: Data,
                 foldername: str,
@@ -157,9 +157,9 @@ def processSectionIdElement(
         return True
     return False
 
-######
+# ***********
 # Parsing Page Elements
-####
+# ********
 def processPageIdElement(
                 data: Data,
                 foldername: str,
@@ -377,9 +377,9 @@ def processPageTextElements(
     
     return False
 
-######
+# ***********
 # Parsing Pipeline
-####
+# ********
 processPipeline = [
     processMajorIdElement,
     processMinorIdElement,
