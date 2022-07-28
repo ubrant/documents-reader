@@ -26,9 +26,9 @@ from re                       import findall, sub, search
 
 import webbrowser
 
-######
+# ***********
 # Helpers
-####
+# ********
 def ensureDir(dirname: str) -> bool:
     if exists(dirname):
         if isdir(dirname):
@@ -59,9 +59,10 @@ def getOutputFilename(outputDir: str,
     
     return join(outputDir,
             f"P{major.id}.{minor.id}.{section.id}.{page.id}.html")
-######
+
+# ***********
 # Web Content Generator
-####
+# ********
 class WebContentGenerator:
     def __init__(self, settings: Settings, data: Data) -> None:
         self.settings: Settings = settings
@@ -169,7 +170,7 @@ class WebContentGenerator:
                             self.writeHtmlPage(major, minor, section, page)
         return
 
-    ###
+    # ***********
     # HTML
     def writeHtmlPage(self, major: Major,
                             minor: Minor,
