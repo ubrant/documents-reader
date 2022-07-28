@@ -19,9 +19,9 @@
 
 from typing import List
 
-######
+# ***********
 # Page Elements
-####
+# ********
 
 # Section Element
 class PageSection:
@@ -441,9 +441,9 @@ class Page:
             else:
                 return ""
 
-######
+# ***********
 # Section Element
-####
+# ********
 class Section:
     def __init__(self) -> None:
         self.id: int = 0
@@ -489,9 +489,9 @@ class Section:
         self.pages = temp
         return self
 
-######
+# ***********
 # Minor Element
-####
+# ********
 class Minor:
     def __init__(self) -> None:
         self.id: int = 0
@@ -537,9 +537,9 @@ class Minor:
         self.sections = temp
         return self
 
-######
+# ***********
 # Major Element
-####
+# ********
 class Major:
     def __init__(self) -> None:
         self.id: int = 0
@@ -585,12 +585,12 @@ class Major:
         self.minors = temp
         return self
 
-######
+# ***********
 # Combined Data
 # -------------
 # 
 # - Data is segregated into Major partitions
-####
+# ********
 class Data:
     DEFAULT_MAJOR_ELEMENT_ID = -1
     DEFAULT_MINOR_ELEMENT_ID = -1
