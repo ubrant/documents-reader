@@ -26,9 +26,9 @@ from _internal.parser      import  Parser
 from _internal.web         import  WebContentGenerator
 
 
-######
+# ***********
 # Loading Settings
-####
+# ********
 
 # Time-stamp - Start
 tsStart = datetime.now()
@@ -71,9 +71,9 @@ checkTemplateFileAvailability(settings.templateSideSectionItemFile)
 checkTemplateFileAvailability(settings.templateSidePageItemFile)
 checkTemplateFileAvailability(settings.templateSiteFile)
 
-######
+# ***********
 # Loading Files
-####
+# ********
 
 # Time-stamp - Start Processing Files
 tsStartProcessingFiles = datetime.now()
@@ -95,9 +95,9 @@ if numFilesLoaded == 0:
     print("No ubd file found ...")
     exit(0)
 
-######
+# ***********
 # Writing Files
-####
+# ********
 
 # Time-stamp - Start Writing Web Content
 tsStartWritingWebContent = datetime.now()
@@ -112,9 +112,9 @@ webGenerator.openOutput()
 
 print("")
 
-######
+# ***********
 # End
-####
+# ********
 
 # Time-stamp - End
 tsEnd = datetime.now()
