@@ -23,9 +23,9 @@ from os.path                   import isfile, join
 from typing                    import Tuple, Type
 from re                        import sub, search
 
-######
+# ***********
 # Common Extractors
-####
+# ********
 def stripLastPartFromPath(filename: str) -> Type[str]:
     tmp = sub("/[^/]*$", "", filename)
     return sub("\\\\[^\\\\]*$", "", tmp)
@@ -78,9 +78,9 @@ def getImageCaptionAndFilename(string: str) -> Tuple[str, str]:
     imagename = trimLR(trimMultipleSpaces(s.group(2)))
     return (caption, imagename)
 
-######################################################################
+# ****************************************************************** #
 #                       Parsing Text Elements                        #
-######################################################################
+# ****************************************************************** #
 
 ######
 # Parsing Major Elements
