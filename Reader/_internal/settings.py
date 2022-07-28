@@ -22,14 +22,14 @@ from os         import getcwd
 from os.path    import join
 from os.path    import sep
 
-######
+# ***********
 # Command-line arguments:
 #          1 => scan-directory
 #          2 => recursion-enabled  [True/False]
 #          3 => recursion-depth    [1000000 => infinite]
 #          4 => output-directory
 #          5 => base-url
-####
+# ********
 class Settings:
     def __init__(self):
         workingDir = getcwd()
