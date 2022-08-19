@@ -10,7 +10,7 @@ The reader is fully implemented in ***Python***, so you need to have Python 3 in
 
 ## Usage
 
-Helper scripts are included for easy use:
+Helper scripts are included for easy utilization:
 
   * ***run-reader.sh*** for Linux distros; *and*
   * ***run-reader.bat*** for Windows
