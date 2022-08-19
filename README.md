@@ -6,7 +6,7 @@
 
 ## Dependencies
 
-It is fully implemented in ***Python***, so you need to have python interpreter installed for using it.
+The reader is fully implemented in ***Python***, so you need to have Python 3 interpreter installed for using it.
 
 ## Usage
 
