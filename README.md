@@ -2,11 +2,21 @@
 
 *UBD* Documents' Reader checks validity of [**UBD formatted** documents](https://github.com/ubrant/documents-format) and generates well-formatted output. It is intended to help (with easy modifications) in feeding data into destination databases or generating any desired format.
 
+&nbsp;
+
 > By default HTML pages are generated as output
+
+
+&nbsp;
+
 
 ## Dependencies
 
 The reader is fully implemented in ***Python***, so you need to have Python 3 interpreter installed for using it.
+
+
+&nbsp;
+
 
 ## Usage
 
