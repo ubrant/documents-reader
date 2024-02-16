@@ -20,10 +20,10 @@ The reader is fully implemented in ***Python***, so you only need to have a Pyth
 
 ## Usage
 
-Helper scripts are included for easy utilization:
+Helper scripts are included for easy invokation:
 
-  * ***run-reader.sh*** for Linux distros; *and*
-  * ***run-reader.bat*** for Windows
+  * You can use ***run-reader.sh*** on Linux distros, *and*
+  * ***run-reader.bat*** on Windows
 
 For basic usage:
 
