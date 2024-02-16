@@ -12,7 +12,7 @@
 
 ## Dependencies
 
-The reader is fully implemented in ***Python***, so you need to have Python 3 interpreter installed for using it.
+The reader is fully implemented in ***Python***, so you only need to have a Python 3 interpreter installed in order to use it.
 
 
 &nbsp;
