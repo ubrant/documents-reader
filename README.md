@@ -7,16 +7,16 @@
 > By default HTML pages are generated as output
 
 
-&nbsp;
 
+&nbsp;
 
 ## Dependencies
 
-The reader is fully implemented in ***Python***, so you only need to have a Python 3 interpreter installed in order to use it.
+The reader is fully implemented in ***Python*** - without any other dependencies, so you only need to have *Python 3* installed to use it.
+
 
 
 &nbsp;
-
 
 ## Usage
 
